@@ -1134,9 +1134,16 @@
                     </div>
                     <div>
                         <label style="font-size:0.8rem;">Console</label>
-                        <select id="adminConsole" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                        <select id="adminConsole" onchange="updateAdminSlotsLimit()" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
                             <option value="PS4">PS4</option>
                             <option value="PS2">PS2</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem;">Stations / Slots</label>
+                        <select id="adminSlots" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                            <option value="1">1 Slot</option>
+                            <option value="2">2 Slots</option>
                         </select>
                     </div>
                     <div>
@@ -1210,26 +1217,21 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        // TODO: Replace with your actual Firebase Project Configuration credentials
-        // Import the functions you need from the SDKs you need
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyB4tWTfbgHtof4Yi4PuGTUM6mu1vwwaF0U",
+          authDomain: "warzone-gaming-cafe-17bc6.firebaseapp.com",
+          databaseURL: "https://warzone-gaming-cafe-17bc6-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "warzone-gaming-cafe-17bc6",
+          storageBucket: "warzone-gaming-cafe-17bc6.firebasestorage.app",
+          messagingSenderId: "456594176227",
+          appId: "1:456594176227:web:cba4049a84145920ef6dd6"
+        };
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyB4tWTfbgHtof4Yi4PuGTUM6mu1vwwaF0U",
-  authDomain: "warzone-gaming-cafe-17bc6.firebaseapp.com",
-  databaseURL: "https://warzone-gaming-cafe-17bc6-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "warzone-gaming-cafe-17bc6",
-  storageBucket: "warzone-gaming-cafe-17bc6.firebasestorage.app",
-  messagingSenderId: "456594176227",
-  appId: "1:456594176227:web:cba4049a84145920ef6dd6"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        
         // Global State Array updated live from cloud
         window.globalBookings = [];
 
@@ -1552,6 +1554,20 @@ const db = getDatabase(app);
             }
         }
 
+        function updateAdminSlotsLimit() {
+            const adminConsole = document.getElementById('adminConsole').value;
+            const adminSlotsSelect = document.getElementById('adminSlots');
+            
+            if (adminConsole === 'PS2') {
+                adminSlotsSelect.innerHTML = `<option value="1">1 Slot</option>`;
+            } else {
+                adminSlotsSelect.innerHTML = `
+                    <option value="1">1 Slot</option>
+                    <option value="2" selected>2 Slots</option>
+                `;
+            }
+        }
+
         function checkAvailability() {
             const date = document.getElementById('gameDate').value;
             const selectedTimeStr = document.getElementById('gameTime').value;
@@ -1750,6 +1766,7 @@ const db = getDatabase(app);
             document.getElementById('adminModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
             document.getElementById('adminDate').valueAsDate = new Date();
+            updateAdminSlotsLimit();
             renderAdminTable();
         }
 
@@ -1764,7 +1781,7 @@ const db = getDatabase(app);
             const time = document.getElementById('adminTime').value;
             const consoleType = document.getElementById('adminConsole').value;
             const duration = document.getElementById('adminDuration').value;
-            const slots = (consoleType === 'PS4') ? 2 : 1; 
+            const slots = document.getElementById('adminSlots').value; 
 
             if (!date || !time) {
                 alert("Please select both Date and Time to apply block.");
@@ -1775,7 +1792,7 @@ const db = getDatabase(app);
                 window.cloudSaveBooking({ date, time, consoleType, slots, duration, isManualBlock: true });
             }
 
-            alert(`🔒 Successfully blocked ${consoleType} slots for ${duration} Hour(s) starting from ${time}!`);
+            alert(`🔒 Successfully blocked ${slots} slot(s) for ${consoleType} (${duration} Hour(s)) starting from ${time}!`);
         }
 
         function removeBooking(id) {
