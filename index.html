@@ -828,7 +828,6 @@
             .menu-toggle {
                 display: block;
             }
-            /* Hidden navigation list for mobile drawer toggle */
             nav ul {
                 display: none;
                 flex-direction: column;
@@ -1206,6 +1205,58 @@
         </div>
     </footer>
 
+    <!-- FIREBASE SDKs (Modular v10) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // TODO: Replace with your actual Firebase Project Configuration credentials
+        const firebaseConfig = {
+            apiKey: "AIzaSyByO7FzSr23nwVzUXnt07zcc7-I4H5XR7Y",
+            authDomain: "warzone-gaming-cafe.firebaseapp.com",
+            projectId: "warzone-gaming-cafe",
+            storageBucket: "warzone-gaming-cafe.firebasestorage.app",
+            messagingSenderId: "1012983278890",
+            appId: "1:1012983278890:web:97465994c6ee9cf06c8253"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // Global State Array updated live from cloud
+        window.globalBookings = [];
+
+        // Real-time listener: Syncs bookings across all global devices automatically
+        const bookingsRef = ref(db, 'bookings');
+        onValue(bookingsRef, (snapshot) => {
+            const data = snapshot.val();
+            window.globalBookings = [];
+            if (data) {
+                Object.keys(data).forEach(key => {
+                    window.globalBookings.push({
+                        id: key,
+                        ...data[key]
+                    });
+                });
+            }
+            // Re-run checks/tables when data changes globally
+            checkAvailability();
+            if(document.getElementById('adminModal').style.display === 'flex') {
+                renderAdminTable();
+            }
+        });
+
+        // Expose Cloud Helpers to Global Scope
+        window.cloudSaveBooking = (bookingData) => {
+            push(bookingsRef, bookingData);
+        };
+
+        window.cloudRemoveBooking = (bookingId) => {
+            const itemRef = ref(db, 'bookings/' + bookingId);
+            remove(itemRef);
+        };
+    </script>
+
     <script>
         const ADMIN_PASSWORD = "warzone2026";
 
@@ -1505,7 +1556,8 @@
             const sessionStartMin = timeToMinutes(selectedTimeStr);
             const sessionEndMin = sessionStartMin + (durationHours * 60);
 
-            let bookings = JSON.parse(localStorage.getItem('warzoneBookings')) || [];
+            // Fetch live dataset globally synchronized via Firebase
+            let bookings = window.globalBookings || [];
             let maxOverlappedActiveStations = 0;
 
             for (let checkMin = sessionStartMin; checkMin < sessionEndMin; checkMin += 30) {
@@ -1626,9 +1678,10 @@
             const slots = document.getElementById('slots').value;
             const duration = document.getElementById('hours').value;
 
-            let bookings = JSON.parse(localStorage.getItem('warzoneBookings')) || [];
-            bookings.push({ date, time, consoleType, slots, duration, isManualBlock: false });
-            localStorage.setItem('warzoneBookings', JSON.stringify(bookings));
+            // Push directly to cloud database globally
+            if(window.cloudSaveBooking) {
+                window.cloudSaveBooking({ date, time, consoleType, slots, duration, isManualBlock: false });
+            }
 
             sendWhatsAppConfirmation();
         }
@@ -1711,27 +1764,25 @@
                 return;
             }
 
-            let bookings = JSON.parse(localStorage.getItem('warzoneBookings')) || [];
-            bookings.push({ date, time, consoleType, slots, duration, isManualBlock: true });
+            if(window.cloudSaveBooking) {
+                window.cloudSaveBooking({ date, time, consoleType, slots, duration, isManualBlock: true });
+            }
 
-            localStorage.setItem('warzoneBookings', JSON.stringify(bookings));
-            renderAdminTable();
             alert(`🔒 Successfully blocked ${consoleType} slots for ${duration} Hour(s) starting from ${time}!`);
         }
 
-        function removeBooking(index) {
-            let bookings = JSON.parse(localStorage.getItem('warzoneBookings')) || [];
-            bookings.splice(index, 1);
-            localStorage.setItem('warzoneBookings', JSON.stringify(bookings));
-            renderAdminTable();
+        function removeBooking(id) {
+            if(window.cloudRemoveBooking) {
+                window.cloudRemoveBooking(id);
+            }
         }
 
         function renderAdminTable() {
-            let bookings = JSON.parse(localStorage.getItem('warzoneBookings')) || [];
+            let bookings = window.globalBookings || [];
             const tbody = document.getElementById('adminBookingsTable');
             tbody.innerHTML = '';
 
-            bookings.forEach((b, index) => {
+            bookings.forEach((b) => {
                 const startMinutes = timeToMinutes(b.time);
                 const endMinutes = startMinutes + (parseFloat(b.duration) * 60);
                 const endTimeStr = minutesToTime(endMinutes);
@@ -1743,7 +1794,7 @@
                     <td>${endTimeStr}</td>
                     <td>${b.consoleType}</td>
                     <td>${b.slots} ${b.isManualBlock ? '(Admin Block)' : '(Booked)'}</td>
-                    <td><button class="btn-danger" onclick="removeBooking(${index})">Delete</button></td>
+                    <td><button class="btn-danger" onclick="removeBooking('${b.id}')">Delete</button></td>
                 `;
                 tbody.appendChild(tr);
             });
