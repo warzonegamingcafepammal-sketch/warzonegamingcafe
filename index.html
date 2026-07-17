@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WARZONE GAMING CAFE</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --dark-bg: #050505;
+            --card-bg: #121212;
+            --neon-orange: #ff4d00;
+            --neon-red: #ff1a1a;
+            --light-silver: #e0e0e0;
+            --glow-shadow: 0 0 20px rgba(255, 77, 0, 0.7);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        h1, h2, h3, h4, .offer-text {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- OFFER HEADER --- */
+        .offer-header {
+            background: linear-gradient(135deg, #ff1a1a, #ff4d00, #ff8c00);
+            color: #fff;
+            text-align: center;
+            padding: 12px 15px;
+            font-size: clamp(0.85rem, 2vw, 1.35rem);
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 6px 25px rgba(255, 77, 0, 0.7);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #fff;
+            word-break: break-word;
+        }
+
+        .offer-header span.highlight {
+            background: #000;
+            color: #ff4d00;
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid #ff4d00;
+        }
+
+        .offer-header i {
+            margin: 0 5px;
+            animation: blink 0.8s infinite alternate;
+        }
+
+        @keyframes blink {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+
+        /* --- NAVIGATION & HEADER --- */
+        header {
+            background-color: rgba(5, 5, 5, 0.95);
+            border-bottom: 3px solid var(--neon-orange);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            width: 70px; 
+            height: 70px;
+            border-radius: 12px;
+            border: 3px solid var(--neon-orange);
+            object-fit: cover;
+            box-shadow: var(--glow-shadow);
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.3rem, 2.5vw, 2.2rem);
+            font-weight: 900;
+            color: #fff;
+            line-height: 1.1;
+            text-shadow: 0 0 15px var(--neon-orange);
+        }
+
+        .logo-text span {
+            color: var(--neon-orange);
+            display: block;
+            font-size: clamp(0.9rem, 1.5vw, 1.4rem);
+            letter-spacing: 3px;
+        }
+
+        /* Navigation Menu & Mobile Drawer */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 700;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: var(--neon-orange);
+            text-shadow: 0 0 8px var(--neon-orange);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: 2px solid var(--neon-orange);
+            color: #fff;
+            font-size: 1.5rem;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: var(--glow-shadow);
+            transition: var(--transition);
+        }
+
+        .menu-toggle:hover {
+            background: var(--neon-orange);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 70px 5% 40px 5%;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle, rgba(255, 77, 0, 0.15) 0%, rgba(5, 5, 5, 1) 75%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 0 25px rgba(255, 77, 0, 0.9);
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2.5vw, 2rem);
+            color: var(--neon-orange);
+            font-weight: 800;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-glow {
+            background: transparent;
+            color: #fff;
+            border: 2px solid var(--neon-orange);
+            padding: 12px 25px;
+            font-size: 1.05rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: var(--transition);
+            box-shadow: var(--glow-shadow);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn-glow:hover:not(:disabled) {
+            background: var(--neon-orange);
+            box-shadow: 0 0 30px var(--neon-orange);
+            transform: scale(1.03);
+        }
+
+        .btn-glow:disabled {
+            border-color: #555;
+            color: #777;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* --- AUTOMATIC CAROUSEL --- */
+        .carousel-section {
+            padding: 40px 0 20px 0;
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+            padding: 0 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 3px;
+            background: var(--neon-orange);
+            margin: 8px auto 0 auto;
+            box-shadow: var(--glow-shadow);
+        }
+
+        .carousel-outer {
+            width: 100%;
+            overflow: hidden;
+            margin: 0 auto;
+            padding: 15px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            transition: transform 0.1s linear;
+        }
+
+        .slide-card {
+            background: var(--card-bg);
+            border: 2px solid rgba(255, 77, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 200px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .slide-card img {
+            width: 100%;
+            height: 78%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .slide-title {
+            height: 22%;
+            padding: 5px 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.78rem;
+            font-weight: bold;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-top: 1px solid rgba(255, 77, 0, 0.2);
+        }
+
+        .slide-card:hover {
+            border-color: var(--neon-orange);
+            box-shadow: var(--glow-shadow);
+            transform: translateY(-5px);
+        }
+
+        .slide-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- DETAILED GAME DISPLAY MODAL --- */
+        .game-detail-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .game-detail-container {
+            background: #0d0d0d;
+            border: 3px solid var(--neon-orange);
+            border-radius: 12px;
+            max-width: 1100px;
+            width: 100%;
+            height: 90vh;
+            max-height: 700px;
+            display: flex;
+            box-shadow: var(--glow-shadow);
+            overflow: hidden;
+            position: relative;
+            animation: modalScaleUp 0.3s ease;
+        }
+
+        @keyframes modalScaleUp {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .game-detail-image-panel {
+            flex: 1;
+            background: #000;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 2px solid rgba(255, 77, 0, 0.3);
+            overflow: hidden;
+            min-height: 220px;
+        }
+
+        .game-detail-image-panel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .game-detail-text-panel {
+            flex: 1.3;
+            padding: 20px 25px;
+            overflow-y: auto;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: linear-gradient(180deg, #0d0d0d 0%, #050505 100%);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .game-detail-title {
+            font-size: clamp(1.3rem, 2.5vw, 2.2rem);
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-orange);
+            border-bottom: 2px solid var(--neon-orange);
+            padding-bottom: 8px;
+            padding-right: 30px;
+        }
+
+        .game-detail-meta {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            background: rgba(255, 77, 0, 0.15);
+            border: 1px solid var(--neon-orange);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+        }
+
+        .game-detail-body {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #ddd;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .game-detail-body h4 {
+            color: var(--neon-orange);
+            font-size: 1.05rem;
+            margin-top: 8px;
+            border-left: 3px solid var(--neon-red);
+            padding-left: 8px;
+        }
+
+        .game-detail-body ul {
+            margin-left: 18px;
+            list-style-type: square;
+        }
+
+        .game-detail-body li {
+            margin-bottom: 4px;
+        }
+
+        .close-detail-modal {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+            transition: var(--transition);
+            background: rgba(0,0,0,0.6);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid var(--neon-orange);
+        }
+
+        .close-detail-modal:hover {
+            color: var(--neon-red);
+            background: #000;
+        }
+
+        /* --- BOOKING SECTION --- */
+        .booking-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #181818 100%);
+            padding: 50px 5%;
+            border-top: 3px solid var(--neon-orange);
+        }
+
+        .booking-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            border: 2px solid var(--neon-orange);
+            border-radius: 12px;
+            padding: 25px 20px;
+            box-shadow: var(--glow-shadow);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+            color: #bbb;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 5px;
+            outline: none;
+            transition: var(--transition);
+            font-family: 'Rajdhani', sans-serif;
+            width: 100%;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--neon-orange);
+            box-shadow: 0 0 10px rgba(255, 77, 0, 0.6);
+        }
+
+        .slot-warning {
+            color: var(--neon-red);
+            font-size: 0.85rem;
+            margin-top: 4px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .offer-indicator {
+            color: #4caf50;
+            font-size: 0.95rem;
+            margin-top: 5px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .price-display {
+            background-color: rgba(255, 77, 0, 0.08);
+            border: 2px dashed var(--neon-orange);
+            padding: 18px 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .price-display h3 {
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            color: #fff;
+        }
+
+        .price-display span {
+            color: var(--neon-orange);
+            font-weight: bold;
+        }
+
+        /* --- MODALS --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 2px solid var(--neon-orange);
+            border-radius: 12px;
+            max-width: 480px;
+            width: 100%;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: var(--glow-shadow);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal h3 {
+            margin-bottom: 12px;
+            color: var(--neon-orange);
+            font-size: 1.35rem;
+        }
+
+        .payment-instructions {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            border-left: 4px solid var(--neon-orange);
+            text-align: left;
+        }
+
+        .upi-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            padding: 8px 12px;
+            border-radius: 5px;
+            margin-top: 6px;
+            gap: 10px;
+        }
+
+        .upi-box span {
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #fff;
+            word-break: break-all;
+        }
+
+        .copy-upi-btn {
+            background: var(--neon-orange);
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            font-family: 'Orbitron', sans-serif;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .copy-upi-btn:hover {
+            background: #ff6a2a;
+            box-shadow: 0 0 10px var(--neon-orange);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(0,0,0,0.4);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            color: var(--neon-red);
+        }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .screenshot-box {
+            background: rgba(255, 77, 0, 0.05);
+            border: 1px dashed var(--neon-orange);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .screenshot-box p {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .screenshot-box span {
+            display: block;
+            font-size: 0.8rem;
+            color: #bbb;
+            margin-top: 3px;
+        }
+
+        .validation-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 77, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 77, 0, 0.3);
+            text-align: left;
+        }
+
+        .validation-check input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--neon-orange);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .validation-check label {
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        /* --- ADMIN PANEL TABLES --- */
+        .admin-table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            min-width: 420px;
+        }
+
+        .admin-table th, .admin-table td {
+            border: 1px solid #444;
+            padding: 6px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .admin-table th {
+            background-color: var(--neon-orange);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--neon-red);
+            border: none;
+            color: white;
+            padding: 4px 8px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        /* --- BRAND BANNER --- */
+        .brand-banner {
+            background-color: #0b0b0b;
+            border-top: 3px solid var(--neon-orange);
+            padding: 40px 5%;
+            text-align: center;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+        }
+
+        .brand-banner h2 {
+            color: #fff;
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px var(--neon-orange);
+        }
+
+        .brand-banner .tagline {
+            color: var(--neon-orange);
+            font-size: clamp(1rem, 2.2vw, 1.6rem);
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .brand-banner .desc {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid #222;
+            padding: 35px 5% 20px 5%;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto 25px auto;
+            text-align: left;
+        }
+
+        .footer-info h3 {
+            color: var(--neon-orange);
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .footer-info p, .footer-info a {
+            color: #ccc;
+            font-size: 0.95rem;
+            text-decoration: none;
+            margin-bottom: 8px;
+            display: block;
+            transition: var(--transition);
+            word-break: break-word;
+        }
+
+        .footer-info a:hover {
+            color: var(--neon-orange);
+            padding-left: 5px;
+        }
+
+        .footer-info i {
+            width: 22px;
+            color: var(--neon-orange);
+        }
+
+        .review-btn-footer {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #4285F4, #34A853);
+            color: white !important;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: var(--transition);
+        }
+
+        .review-btn-footer:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 18px rgba(52, 168, 83, 0.7);
+            padding-left: 12px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #222;
+            padding-top: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* --- MOBILE RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 900px) {
+            .game-detail-container {
+                flex-direction: column;
+                height: 90vh;
+                max-height: none;
+            }
+            .game-detail-image-panel {
+                flex: none;
+                height: 200px;
+                border-right: none;
+                border-bottom: 2px solid var(--neon-orange);
+            }
+            .game-detail-text-panel {
+                flex: 1;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 4%;
+            }
+            .logo-img {
+                width: 55px;
+                height: 55px;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 20px 0;
+                border-bottom: 3px solid var(--neon-orange);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+                gap: 15px;
+                text-align: center;
+                z-index: 100;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                width: 100%;
+            }
+            nav a {
+                display: block;
+                padding: 8px 0;
+                font-size: 1.1rem;
+            }
+            .footer-grid {
+                text-align: center;
+            }
+            .footer-info a:hover {
+                padding-left: 0;
+            }
+            .booking-container {
+                padding: 15px 12px;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- OFFER HEADER -->
+    <div class="offer-header">
+        <i class="fa-solid fa-bolt"></i> <span class="highlight">OFFER! JUST 100 FOR TWO PLAYER</span> <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.jpeg" alt="Warzone Gaming Cafe" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo-text">WARZONE <span>GAMING CAFE</span></div>
+        </div>
+        <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <nav>
+            <ul id="navMenu">
+                <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+                <li><a href="#carousel" onclick="closeMobileMenu()">Games</a></li>
+                <li><a href="#book" onclick="closeMobileMenu()">Book Slot</a></li>
+                <li>
+                    <a href="https://share.google/jIItWmIE56JDyO6PY" target="_blank" class="review-btn-footer" onclick="closeMobileMenu()">
+                        <i class="fa-solid fa-star"></i> Leave a Review
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <h1>GAME HARD. CHILL HARDER.</h1>
+        <p>PS4 & PS2 Gaming Arena</p>
+        <button class="btn-glow" onclick="document.getElementById('book').scrollIntoView();">BOOK YOUR STATION</button>
+    </section>
+
+    <!-- CAROUSEL -->
+    <section class="carousel-section" id="carousel">
+        <h2 class="section-title">CHOOSE YOUR BATTLE</h2>
+        <div class="carousel-outer">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="slide-card" onclick="openGameDetail('cod')"><img src="cod.jpg" alt="Call of Duty"><div class="slide-title">Call of Duty: Black Ops III</div></div>
+                <div class="slide-card" onclick="openGameDetail('wd2')"><img src="wd2.jpg" alt="Watch Dogs 2"><div class="slide-title">Watch Dogs 2</div></div>
+                <div class="slide-card" onclick="openGameDetail('wwe')"><img src="wwe.jpg" alt="WWE 2K25"><div class="slide-title">WWE 2K25</div></div>
+                <div class="slide-card" onclick="openGameDetail('tekken')"><img src="tekken.jpg" alt="Tekken 7"><div class="slide-title">Tekken 7</div></div>
+                <div class="slide-card" onclick="openGameDetail('dirt')"><img src="dirt.jpg" alt="Dirt 5"><div class="slide-title">Dirt 5</div></div>
+                <div class="slide-card" onclick="openGameDetail('fc26')"><img src="fc26.jpg" alt="EA Sports FC 26"><div class="slide-title">EA Sports FC 26</div></div>
+                <div class="slide-card" onclick="openGameDetail('gta')"><img src="gta.jpg" alt="GTA V"><div class="slide-title">Grand Theft Auto V</div></div>
+                <div class="slide-card" onclick="openGameDetail('awo')"><img src="awo.jpeg" alt="A Way Out"><div class="slide-title">A Way Out</div></div>
+                <div class="slide-card" onclick="openGameDetail('it')"><img src="it.jpeg" alt="It Takes Two"><div class="slide-title">It Takes Two</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GAME DETAIL LIGHTBOX MODAL -->
+    <div id="gameDetailModal" class="game-detail-modal">
+        <div class="game-detail-container">
+            <span class="close-detail-modal" onclick="closeGameDetail()">&times;</span>
+            
+            <div class="game-detail-image-panel">
+                <img id="detailGameImage" src="" alt="Game Poster">
+            </div>
+
+            <div class="game-detail-text-panel">
+                <h3 id="detailGameTitle" class="game-detail-title">Game Title</h3>
+                
+                <div class="game-detail-meta">
+                    <span class="meta-badge" id="detailGenre">Action</span>
+                    <span class="meta-badge" id="detailPlayersLimit">1-4 Players</span>
+                    <span class="meta-badge" id="detailPlatform">PS4 Pro</span>
+                </div>
+
+                <div class="game-detail-body" id="detailGameContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKING & PAYMENT SECTION -->
+    <section class="booking-section" id="book">
+        <div class="booking-container">
+            <h2 class="section-title" style="display:block; text-align:center; margin-bottom:20px;">RESERVE AND PAY</h2>
+            
+            <form id="bookingForm" onsubmit="initiatePayment(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter your number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="consoleType">Select Console</label>
+                        <select id="consoleType" onchange="updateConsoleLimits(); checkAvailability();" required>
+                            <option value="PS4" selected>PlayStation 4 (PS4)</option>
+                            <option value="PS2">PlayStation 2 (PS2)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="slots">Number of Slots / Stations</label>
+                        <input type="number" id="slots" min="1" max="2" value="1" onchange="checkAvailability();" required>
+                        <div id="slotWarning" class="slot-warning">PS2 only has 1 slot station available!</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="players">Players per Station</label>
+                        <select id="players" onchange="calculateTotal()" required>
+                            <option value="1">1 Player</option>
+                            <option value="2" selected>2 Players</option>
+                            <option value="3">3 Players</option>
+                            <option value="4">4 Players</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gameDate">Date</label>
+                        <input type="date" id="gameDate" onchange="checkAvailability();" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gameTime">Time Slot (24 Hours Open)</label>
+                        <select id="gameTime" onchange="checkAvailability();" required>
+                            <option value="12:00 AM">12:00 AM (Midnight)</option>
+                            <option value="12:30 AM">12:30 AM</option>
+                            <option value="01:00 AM">01:00 AM</option>
+                            <option value="01:30 AM">01:30 AM</option>
+                            <option value="02:00 AM">02:00 AM</option>
+                            <option value="02:30 AM">02:30 AM</option>
+                            <option value="03:00 AM">03:00 AM</option>
+                            <option value="03:30 AM">03:30 AM</option>
+                            <option value="04:00 AM">04:00 AM</option>
+                            <option value="04:30 AM">04:30 AM</option>
+                            <option value="05:00 AM">05:00 AM</option>
+                            <option value="05:30 AM">05:30 AM</option>
+                            <option value="06:00 AM">06:00 AM</option>
+                            <option value="06:30 AM">06:30 AM</option>
+                            <option value="07:00 AM">07:00 AM</option>
+                            <option value="07:30 AM">07:30 AM</option>
+                            <option value="08:00 AM">08:00 AM</option>
+                            <option value="08:30 AM">08:30 AM</option>
+                            <option value="09:00 AM">09:00 AM</option>
+                            <option value="09:30 AM">09:30 AM</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="10:30 AM">10:30 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="11:30 AM">11:30 AM</option>
+                            <option value="12:00 PM">12:00 PM (Noon)</option>
+                            <option value="12:30 PM">12:30 PM</option>
+                            <option value="01:00 PM">01:00 PM</option>
+                            <option value="01:30 PM">01:30 PM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="02:30 PM">02:30 PM</option>
+                            <option value="03:00 PM">03:00 PM</option>
+                            <option value="03:30 PM">03:30 PM</option>
+                            <option value="04:00 PM">04:00 PM</option>
+                            <option value="04:30 PM">04:30 PM</option>
+                            <option value="05:00 PM">05:00 PM</option>
+                            <option value="05:30 PM">05:30 PM</option>
+                            <option value="06:00 PM" selected>06:00 PM</option>
+                            <option value="06:30 PM">06:30 PM</option>
+                            <option value="07:00 PM">07:00 PM</option>
+                            <option value="07:30 PM">07:30 PM</option>
+                            <option value="08:00 PM">08:00 PM</option>
+                            <option value="08:30 PM">08:30 PM</option>
+                            <option value="09:00 PM">09:00 PM</option>
+                            <option value="09:30 PM">09:30 PM</option>
+                            <option value="10:00 PM">10:00 PM</option>
+                            <option value="10:30 PM">10:30 PM</option>
+                            <option value="11:00 PM">11:00 PM</option>
+                            <option value="11:30 PM">11:30 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="hours">Duration</label>
+                        <select id="hours" onchange="checkAvailability(); calculateTotal();" required>
+                            <option value="1">1 Hour</option>
+                            <option value="1.5">1 Hour 30 Mins</option>
+                            <option value="2">2 Hours</option>
+                            <option value="2.5">2 Hours 30 Mins</option>
+                            <option value="3">3 Hours</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="availabilityStatus" style="text-align: center; margin-bottom: 15px; font-weight: bold; font-size: 1rem;"></div>
+
+                <div class="price-display">
+                    <h3>Total Payable Amount: ₹<span id="calculatedPrice">100</span></h3>
+                    <div id="specialOfferPromo" class="offer-indicator">🎉 Promo Offer Active: Flat ₹50/hr per player!</div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button type="submit" id="submitBookingBtn" class="btn-glow" style="width: 100%; max-width: 400px;">
+                        <i class="fa-solid fa-credit-card"></i> PROCEED TO PAYMENT
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- PAYMENT MODAL -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>UPI Payment Portal</h3>
+            
+            <div class="payment-instructions">
+                Total Amount: <strong style="color: var(--neon-orange);">₹<span id="modalAmount">100</span></strong><br><br>
+                UPI ID:
+                <div class="upi-box">
+                    <span id="upiIdText">shaiksahil2511-4@okicici</span>
+                    <button class="copy-upi-btn" onclick="copyUpiId()">
+                        <i class="fa-solid fa-copy"></i> <span id="copyBtnText">Copy</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="step-container">
+                <a id="genericUpiPayBtn" href="#" class="btn-glow" style="background: #2e7d32; border-color: #2e7d32; width: 100%;" target="_blank">
+                    <i class="fa-solid fa-wallet"></i> PAY VIA UPI APP
+                </a>
+
+                <div class="screenshot-box">
+                    <p>📸 Capture your payment screenshot</p>
+                    <span>Add it to your WhatsApp chat on the next step to confirm your slot!</span>
+                </div>
+                
+                <div class="validation-check">
+                    <input type="checkbox" id="confirmPaymentCheckbox" onchange="toggleWhatsAppButton()">
+                    <label for="confirmPaymentCheckbox">I have completed my online payment</label>
+                </div>
+
+                <button id="whatsappSubmitBtn" class="btn-glow" onclick="saveBookingAndConfirm()" style="width: 100%; opacity: 0.5; cursor: not-allowed;" disabled>
+                    <i class="fa-brands fa-whatsapp"></i> CONFIRM & SEND TO WHATSAPP
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PASSWORD GATE MODAL -->
+    <div id="adminPasswordModal" class="modal">
+        <div class="modal-content" style="max-width: 380px;">
+            <span class="close-modal" onclick="closeAdminPasswordGate()">&times;</span>
+            <h3><i class="fa-solid fa-lock"></i> Admin Authentication</h3>
+            <p style="margin-bottom:12px; color:#bbb; font-size: 0.95rem;">Access restricted to Owners only.</p>
+            <div class="form-group" style="margin-bottom: 15px;">
+                <input type="password" id="adminPasswordField" placeholder="Enter Password" style="text-align:center;" onkeydown="if(event.key === 'Enter') verifyAdminPassword()">
+                <div id="passwordErrorMsg" style="color:var(--neon-red); font-weight:bold; margin-top:6px; display:none; font-size:0.9rem;">❌ Invalid Password!</div>
+            </div>
+            <button onclick="verifyAdminPassword()" class="btn-glow" style="width: 100%;">ACCESS SYSTEM</button>
+        </div>
+    </div>
+
+    <!-- OWNER ADMIN PANEL MODAL -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content" style="max-width: 650px;">
+            <span class="close-modal" onclick="closeAdmin()">&times;</span>
+            <h3><i class="fa-solid fa-screwdriver-wrench"></i> Warzone Admin Control</h3>
+            
+            <div class="payment-instructions" style="text-align: left; border-left: 4px solid var(--neon-red);">
+                <h4 style="margin-bottom:8px; font-size:1.05rem;">Block Slots Manually</h4>
+                <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom:10px;">
+                    <div>
+                        <label style="font-size:0.8rem;">Date</label>
+                        <input type="date" id="adminDate" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem;">Time</label>
+                        <select id="adminTime" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;"></select>
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem;">Console</label>
+                        <select id="adminConsole" onchange="updateAdminSlotsLimit()" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                            <option value="PS4">PS4</option>
+                            <option value="PS2">PS2</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem;">Stations / Slots</label>
+                        <select id="adminSlots" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                            <option value="1">1 Slot</option>
+                            <option value="2">2 Slots</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-size:0.8rem;">Duration</label>
+                        <select id="adminDuration" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                            <option value="1">1 Hour</option>
+                            <option value="1.5">1.5 Hours</option>
+                            <option value="2">2 Hours</option>
+                            <option value="3">3 Hours</option>
+                        </select>
+                    </div>
+                </div>
+                <button onclick="adminManualBlock()" class="btn-glow" style="padding: 8px 15px; font-size:0.95rem; width:100%;">BLOCK SLOT STATION</button>
+            </div>
+
+            <h4 style="margin:15px 0 8px 0; text-align:left; font-size:1.1rem;">Active Reservations / Blocks</h4>
+            <div class="admin-table-container" style="max-height: 200px; overflow-y: auto;">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>End Time</th>
+                            <th>Console</th>
+                            <th>Stations</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminBookingsTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- BRAND BANNER -->
+    <section class="brand-banner">
+        <h2>WARZONE GAMING CAFE</h2>
+        <div class="tagline">EAT. SLEEP. GAME. REPEAT.</div>
+        <p class="desc">High performance consoles configured and ready for the ultimate co-op gaming sessions.</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-info">
+                <h3>About Our Arena</h3>
+                <p>Welcome to Chennai's premier co-op multiplayer hub. Play solo, partner up in split-screen campaigns, or clash head-to-head on the best screens in town.</p>
+            </div>
+            <div class="footer-info">
+                <h3>Quick Support</h3>
+                <a href="tel:7338904277"><i class="fa-solid fa-phone"></i> +91 7338904277</a>
+                <a href="https://instagram.com/warzone_gamingcafe" target="_blank"><i class="fa-brands fa-instagram"></i> @warzone_gamingcafe</a>
+                <a href="https://share.google/jIItWmIE56JDyO6PY" target="_blank" class="review-btn-footer">
+                    <i class="fa-solid fa-star"></i> Leave a Google Review
+                </a>
+            </div>
+            <div class="footer-info">
+                <h3>Our Arena Location</h3>
+                <a href="https://www.google.com/maps/search/?api=1&query=No.55,+nalla+thambi+road,+anna+nagar,+pammal,+chennai+-+600075" target="_blank">
+                    <i class="fa-solid fa-location-dot"></i> No.55, Nalla Thambi Road, Anna Nagar, Pammal, Chennai - 600075
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p onclick="triggerAdminAuth()" style="cursor:pointer;">© 2026 <span style="text-decoration:underline;">WARZONE Gaming Cafe</span>. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- FIREBASE SDKs (Modular v10) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, remove, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyB4tWTfbgHtof4Yi4PuGTUM6mu1vwwaF0U",
+          authDomain: "warzone-gaming-cafe-17bc6.firebaseapp.com",
+          databaseURL: "https://warzone-gaming-cafe-17bc6-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "warzone-gaming-cafe-17bc6",
+          storageBucket: "warzone-gaming-cafe-17bc6.firebasestorage.app",
+          messagingSenderId: "456594176227",
+          appId: "1:456594176227:web:cba4049a84145920ef6dd6"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        
+        window.globalBookings = [];
+
+        const bookingsRef = ref(db, 'bookings');
+        onValue(bookingsRef, (snapshot) => {
+            const data = snapshot.val();
+            window.globalBookings = [];
+            if (data) {
+                Object.keys(data).forEach(key => {
+                    window.globalBookings.push({
+                        id: key,
+                        ...data[key]
+                    });
+                });
+            }
+            checkAvailability();
+            if(document.getElementById('adminModal').style.display === 'flex') {
+                renderAdminTable();
+            }
+        });
+
+        window.cloudSaveBooking = (bookingData) => {
+            push(bookingsRef, bookingData);
+        };
+
+        window.cloudRemoveBooking = (bookingId) => {
+            const itemRef = ref(db, 'bookings/' + bookingId);
+            remove(itemRef);
+        };
+    </script>
+
+    <script>
+        const ADMIN_PASSWORD = "warzone2026";
+
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.remove('active');
+        }
+
+        const gameDb = {
+            cod: {
+                title: "Call of Duty: Black Ops III",
+                image: "cod.jpg",
+                genre: "Sci-Fi Shooter / FPS",
+                players: "1 - 4 Players Local",
+                platform: "PS4 Pro (Smooth 60 FPS)",
+                content: `
+                    <h4>🔥 Welcome to the Ultimate Future Warfare Hub</h4>
+                    <p>Call of Duty: Black Ops III transports you into a dark, gritty future where a new breed of Black Ops soldier emerges, blurring the lines between human intelligence and military technology. At Warzone, this is the absolute top-tier local Co-Op shooter for friends looking to team up or settle rivalries.</p>
+                    <h4>👥 Local Multiplayer & Split-Screen Mastery</h4>
+                    <p>Why play alone when you can squad up on our screens? Black Ops III supports local split-screen co-op play. Whether you want to face waves of bloodthirsty zombies together or jump into a custom local match, the action is non-stop.</p>
+                    <h4>🧟 The Legendary Shadows of Evil Zombies Mode</h4>
+                    <p>One of the main reasons gamers book our stations is the immersive, 1940s film-noir-inspired Zombies mode.
+                    <ul>
+                        <li><strong>Beast Mode Optimization:</strong> Coordinate who transforms into the Beast first to activate power switches and unlock hidden rooms early.</li>
+                        <li><strong>Points Allocation:</strong> Save your points in the early rounds by lining up headshots with your starting pistol.</li>
+                        <li><strong>Wall Buys vs. Mystery Box:</strong> Rely on reliable wall-weapons like the Kuda or KN-44 instead of wasting points gambling on the box early on!</li>
+                    </ul>
+                    </p>
+                    <h4>🎮 Pro Setup & Recommended Layouts</h4>
+                    <p>We configure our PS4 consoles with optimized controller sensitivities and button layouts to give you the ultimate competitive edge.</p>
+                `
+            },
+            wd2: {
+                title: "Watch Dogs 2",
+                image: "wd2.jpg",
+                genre: "Open World / Action-Adventure",
+                players: "1 Player (Campaign Mode)",
+                platform: "PS4 (High Fidelity)",
+                content: `
+                    <h4>🌉 Hack the San Francisco Bay Area</h4>
+                    <p>Step into the shoes of Marcus Holloway, a brilliant young hacker living in the birthplace of the tech revolution, the San Francisco Bay Area. Team up with DedSec to take down ctOS 2.0.</p>
+                    <h4>🛡️ Dynamic Playstyles: Aggressive vs. Ghost Hacking</h4>
+                    <p>
+                    <ul>
+                        <li><strong>The Trickster (RC Specialist):</strong> Complete entire infiltration missions using your RC Jumper and Quadcopter drone remotely.</li>
+                        <li><strong>The Ghost (Stealth Master):</strong> Blend into the shadows with tasers and silent takedowns.</li>
+                        <li><strong>The Aggressive Gunner:</strong> Craft heavy weaponry using DedSec's 3D printers and fight your way out.</li>
+                    </ul>
+                    </p>
+                    <h4>🚗 Ultimate Open-World Chaos</h4>
+                    <p>Take a break from the campaign to steal luxury sports cars, hack traffic lights, or climb rooftops with cranes for breathtaking views.</p>
+                `
+            },
+            wwe: {
+                title: "WWE 2K25",
+                image: "wwe.jpg",
+                genre: "Sports / Fighting",
+                players: "1 - 4 Players Local",
+                platform: "PS4 (Fluid Animations)",
+                content: `
+                    <h4>🤼 The Peak of Sports Entertainment Simulation</h4>
+                    <p>Experience the drama, realism, and high-impact action of WWE 2K25 with a massive roster of superstars and legends.</p>
+                    <h4>⚡ Local Multiplayer Cafe Showdowns</h4>
+                    <p>
+                    <ul>
+                        <li><strong>TLC Matches:</strong> Climb ladders and crash friends through wooden tables.</li>
+                        <li><strong>Royal Rumble:</strong> Enter one by one and battle to throw everyone over the top rope.</li>
+                        <li><strong>Hell in a Cell:</strong> Break out of the cage structure and climb to the top for a high-risk slam.</li>
+                    </ul>
+                    </p>
+                    <h4>🏆 Pro-Tip for Victory: Timing the Reversal</h4>
+                    <p>Keep a close eye on the prompt over your wrestler's head and tap the reversal trigger at the exact millisecond to turn a slam into a counter.</p>
+                `
+            },
+            tekken: {
+                title: "Tekken 7",
+                image: "tekken.jpg",
+                genre: "3D Fighting Game",
+                players: "1 - 2 Players Head-To-Head",
+                platform: "PS4 (Flawless 60 FPS Engine)",
+                content: `
+                    <h4>🥊 Unleash Your Ultimate Rage in 1v1 Clashes</h4>
+                    <p>Tekken 7 is the ultimate arcade fighter experience with iconic 3D movement and high-stakes combat.</p>
+                    <h4>📈 Mastering the Combat Mechanics</h4>
+                    <p>
+                    <ul>
+                        <li><strong>Side-Stepping:</strong> Move into background/foreground to completely dodge linear attacks.</li>
+                        <li><strong>Rage Arts:</strong> Utilize cinematic Rage Arts for massive damage when health drops below 25%.</li>
+                        <li><strong>Screws & Combos:</strong> Launch opponents into the air and apply screw attacks to bounce them off the ground.</li>
+                    </ul>
+                    </p>
+                    <h4>🥇 Elite Character Recommendations</h4>
+                    <p>Pick the fighter that matches your rhythm, from Jin Kazama to Hwoarang or Eddy Gordo.</p>
+                `
+            },
+            dirt: {
+                title: "Dirt 5",
+                image: "dirt.jpg",
+                genre: "Off-Road Racing",
+                players: "1 - 4 Players Split-Screen",
+                platform: "PS4 (Fast Load Times)",
+                content: `
+                    <h4>🏎️ High-Octane, Off-Road Arcade Madness</h4>
+                    <p>Battle across gravel, ice, snow, mud, and tarmac in custom vehicles ranging from buggy racers to classic rally cars.</p>
+                    <h4>🍂 Muddy Splitscreen Competitions</h4>
+                    <p>
+                    <ul>
+                        <li><strong>Ice Breaker Races:</strong> Drift across frozen lakes where throttle control is everything.</li>
+                        <li><strong>Landrush:</strong> Push your buggy over massive jumps.</li>
+                        <li><strong>Dynamic Weather:</strong> Watch tracks shift dynamically mid-race.</li>
+                    </ul>
+                    </p>
+                    <h4>🛠️ Handling Pro-Tips</h4>
+                    <p>Initiate drifts early, feather the accelerator, and use muddy ruts to guide your vehicle through hairpin bends.</p>
+                `
+            },
+            fc26: {
+                title: "EA Sports FC 26",
+                image: "fc26.jpg",
+                genre: "Sports / Football Simulation",
+                players: "1 - 4 Players Local",
+                platform: "PS4 Pro (Ultra Smooth)",
+                content: `
+                    <h4>⚽ Kick Off the Ultimate Derby at Warzone</h4>
+                    <p>EA Sports FC 26 brings the world's game to life with unmatched realism and custom local tournaments.</p>
+                    <h4>🔥 Dynamic Co-op and VS Matchups</h4>
+                    <p>
+                    <ul>
+                        <li><strong>Tactical Defending:</strong> Use jockeying (L2) to contain your opponent and seal passing lanes.</li>
+                        <li><strong>Precision Passing:</strong> Break down tight defenses with through-balls.</li>
+                        <li><strong>Set Piece Masterclass:</strong> Curve your free kicks to catch rivals off guard.</li>
+                    </ul>
+                    </p>
+                    <h4>📋 Formations & Tactical Setup</h4>
+                    <p>Opt for a 4-3-3 to exploit wings or lock down with a 4-2-3-1.</p>
+                `
+            },
+            gta: {
+                title: "Grand Theft Auto V",
+                image: "gta.jpg",
+                genre: "Open World / Action-Adventure",
+                players: "1 Player (Campaign Mode)",
+                platform: "PS4 (Immersive Visuals)",
+                content: `
+                    <h4>🏙️ Return to the Sun-Drenched City of Los Santos</h4>
+                    <p>Switch seamlessly between Michael, Franklin, and Trevor as they execute daring heists across Los Santos.</p>
+                    <h4>💰 Master the Art of Heists</h4>
+                    <p>Plan out preparation missions, pick your support crew, and pull off multi-million dollar robberies.</p>
+                    <h4>🏎️ Absolute Sandbox Freedom</h4>
+                    <p>Customize exotic supercars, perform stunt jumps, fly military jets, or explore Mount Chiliad.</p>
+                `
+            },
+            awo: {
+                title: "A Way Out",
+                image: "awo.jpeg",
+                genre: "Exclusive Co-Op Adventure",
+                players: "Strictly 2 Players Local Co-Op",
+                platform: "PS4 (Cinematic Masterpiece)",
+                content: `
+                    <h4>⛓️ Two Prisoners. One Daring Escape.</h4>
+                    <p>Play as Leo or Vincent, two prisoners who must form a fragile alliance to escape prison and seek revenge.</p>
+                    <h4>🤝 Seamless Split-Screen Synchronization</h4>
+                    <p>
+                    <ul>
+                        <li><strong>Perfect Communication:</strong> Coordinate movements during intense escape segments.</li>
+                        <li><strong>Interactive Mini-Games:</strong> Challenge each other to arm-wrestling and darts.</li>
+                    </ul>
+                    </p>
+                    <h4>🎬 A Thrilling Cinematic Experience</h4>
+                    <p>Plays like a high-budget Hollywood blockbuster with gripping plot twists.</p>
+                `
+            },
+            it: {
+                title: "It Takes Two",
+                image: "it.jpeg",
+                genre: "Co-Op Platforming Adventure",
+                players: "Strictly 2 Players Local Co-Op",
+                platform: "PS4 (Vibrant & Fluid)",
+                content: `
+                    <h4>🧸 An Enchanting Journey of Connection and Fun</h4>
+                    <p>Play as Cody and May, a clashing couple transformed into hand-crafted dolls by a magic spell.</p>
+                    <h4>🧩 Ever-Changing Gameplay Mechanics</h4>
+                    <p>
+                    <ul>
+                        <li><strong>The Hammer and the Nail:</strong> Swing from hooks while your partner smashes obstacles.</li>
+                        <li><strong>Time and Space:</strong> Manipulate time and change sizes.</li>
+                        <li><strong>Fun Mini-Games:</strong> Keep things competitive with hidden mini-games.</li>
+                    </ul>
+                    </p>
+                    <h4>🌈 Vibrant Visuals & Pure Joy</h4>
+                    <p>The absolute perfect game for couples, siblings, and best friends.</p>
+                `
+            }
+        };
+
+        function openGameDetail(gameId) {
+            const game = gameDb[gameId];
+            if (!game) return;
+
+            document.getElementById('detailGameImage').src = game.image;
+            document.getElementById('detailGameTitle').innerText = game.title;
+            document.getElementById('detailGenre').innerText = game.genre;
+            document.getElementById('detailPlayersLimit').innerText = game.players;
+            document.getElementById('detailPlatform').innerText = game.platform;
+            document.getElementById('detailGameContent').innerHTML = game.content;
+
+            document.getElementById('gameDetailModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGameDetail() {
+            document.getElementById('gameDetailModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        const track = document.getElementById('carouselTrack');
+        const cards = Array.from(track.children);
+        cards.forEach(card => {
+            const clone = card.cloneNode(true);
+            track.appendChild(clone);
+        });
+
+        let currentScroll = 0;
+        const speed = 1.5; 
+        let isPaused = false;
+
+        function scrollCarousel() {
+            if (!isPaused) {
+                currentScroll -= speed;
+                const resetBoundary = track.scrollWidth / 2;
+                if (Math.abs(currentScroll) >= resetBoundary) {
+                    currentScroll = 0;
+                }
+                track.style.transform = `translateX(${currentScroll}px)`;
+            }
+            requestAnimationFrame(scrollCarousel);
+        }
+        track.addEventListener('mouseenter', () => isPaused = true);
+        track.addEventListener('mouseleave', () => isPaused = false);
+        track.addEventListener('touchstart', () => isPaused = true);
+        track.addEventListener('touchend', () => isPaused = false);
+        requestAnimationFrame(scrollCarousel);
+
+        function timeToMinutes(timeStr) {
+            const [time, modifier] = timeStr.split(' ');
+            let [hours, minutes] = time.split(':').map(Number);
+            if (hours === 12) hours = 0;
+            if (modifier === 'PM') hours += 12;
+            return hours * 60 + minutes;
+        }
+
+        function minutesToTime(totalMinutes) {
+            let hours = Math.floor(totalMinutes / 60);
+            const minutes = totalMinutes % 60;
+            const modifier = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            if (hours === 0) hours = 12;
+            const minutesStr = minutes < 10 ? '0' + minutes : minutes;
+            return `${hours}:${minutesStr} ${modifier}`;
+        }
+
+        const gameTimeSelect = document.getElementById('gameTime');
+        const adminTimeSelect = document.getElementById('adminTime');
+        Array.from(gameTimeSelect.options).forEach(opt => {
+            const clone = opt.cloneNode(true);
+            adminTimeSelect.appendChild(clone);
+        });
+
+        function updateConsoleLimits() {
+            const consoleType = document.getElementById('consoleType').value;
+            const slotsInput = document.getElementById('slots');
+            const slotWarning = document.getElementById('slotWarning');
+
+            if (consoleType === 'PS2') {
+                slotsInput.value = 1;
+                slotsInput.max = 1;
+                slotWarning.style.display = 'block';
+            } else {
+                slotsInput.max = 2;
+                slotWarning.style.display = 'none';
+            }
+        }
+
+        function updateAdminSlotsLimit() {
+            const adminConsole = document.getElementById('adminConsole').value;
+            const adminSlotsSelect = document.getElementById('adminSlots');
+            
+            if (adminConsole === 'PS2') {
+                adminSlotsSelect.innerHTML = `<option value="1">1 Slot</option>`;
+            } else {
+                adminSlotsSelect.innerHTML = `
+                    <option value="1">1 Slot</option>
+                    <option value="2" selected>2 Slots</option>
+                `;
+            }
+        }
+
+        function checkAvailability() {
+            const date = document.getElementById('gameDate').value;
+            const selectedTimeStr = document.getElementById('gameTime').value;
+            const consoleType = document.getElementById('consoleType').value;
+            const requestedSlots = parseInt(document.getElementById('slots').value) || 1;
+            const durationHours = parseFloat(document.getElementById('hours').value) || 1;
+
+            const maxCapacity = (consoleType === 'PS4') ? 2 : 1;
+            const sessionStartMin = timeToMinutes(selectedTimeStr);
+            const sessionEndMin = sessionStartMin + (durationHours * 60);
+
+            let bookings = window.globalBookings || [];
+            let maxOverlappedActiveStations = 0;
+
+            for (let checkMin = sessionStartMin; checkMin < sessionEndMin; checkMin += 30) {
+                let bookedStationsAtThisTime = 0;
+
+                bookings.forEach(booking => {
+                    if (booking.date === date && booking.consoleType === consoleType) {
+                        const existingStart = timeToMinutes(booking.time);
+                        const existingEnd = existingStart + (parseFloat(booking.duration) * 60);
+
+                        if (checkMin >= existingStart && checkMin < existingEnd) {
+                            bookedStationsAtThisTime += parseInt(booking.slots);
+                        }
+                    }
+                });
+
+                if (bookedStationsAtThisTime > maxOverlappedActiveStations) {
+                    maxOverlappedActiveStations = bookedStationsAtThisTime;
+                }
+            }
+
+            const availableSlots = maxCapacity - maxOverlappedActiveStations;
+            const statusDiv = document.getElementById('availabilityStatus');
+            const submitBtn = document.getElementById('submitBookingBtn');
+
+            if (availableSlots <= 0) {
+                statusDiv.innerHTML = `❌ Slot Unavailable! All ${consoleType} stations are booked during this time.`;
+                statusDiv.style.color = 'var(--neon-red)';
+                submitBtn.disabled = true;
+            } else if (requestedSlots > availableSlots) {
+                statusDiv.innerHTML = `⚠️ Conflict! Only ${availableSlots} ${consoleType} station(s) available.`;
+                statusDiv.style.color = 'var(--neon-orange)';
+                submitBtn.disabled = true;
+            } else {
+                statusDiv.innerHTML = `✅ ${availableSlots} ${consoleType} station(s) ready!`;
+                statusDiv.style.color = '#4caf50';
+                submitBtn.disabled = false;
+                calculateTotal();
+            }
+        }
+
+        function calculateTotal() {
+            const consoleType = document.getElementById('consoleType').value;
+            const slots = parseInt(document.getElementById('slots').value) || 1;
+            const players = parseInt(document.getElementById('players').value) || 1;
+            const totalHours = parseFloat(document.getElementById('hours').value) || 1;
+            const promoAlert = document.getElementById('specialOfferPromo');
+
+            const ps2Rates = { 1: 50, 2: 90, 3: 120, 4: 150 };
+            const ps2Extensions = { 1: 30, 2: 50, 3: 70, 4: 90 };
+
+            let finalCostPerStation = 0;
+            const fullHours = Math.floor(totalHours);
+            const hasHalfHour = (totalHours % 1) !== 0;
+
+            if (consoleType === 'PS2') {
+                promoAlert.style.display = 'none';
+                if (fullHours >= 1) finalCostPerStation += ps2Rates[players] * fullHours;
+                if (hasHalfHour) finalCostPerStation += ps2Extensions[players];
+            } else {
+                if (players === 1) {
+                    promoAlert.style.display = 'none';
+                    finalCostPerStation += 100 * fullHours;
+                    if (hasHalfHour) finalCostPerStation += 50; 
+                } else {
+                    promoAlert.style.display = 'block';
+                    promoAlert.innerText = `🎉 Co-Op Offer Active: Just ₹50/hr per player!`;
+                    const hourlyRate = players * 50;
+                    finalCostPerStation += hourlyRate * fullHours;
+                    if (hasHalfHour) finalCostPerStation += (hourlyRate / 2); 
+                }
+            }
+
+            const grandTotal = Math.round(finalCostPerStation * slots);
+            document.getElementById('calculatedPrice').innerText = grandTotal;
+            document.getElementById('modalAmount').innerText = grandTotal;
+            generatePaymentLink(grandTotal);
+        }
+
+        function generatePaymentLink(amount) {
+            const upiId = "shaiksahil2511-4@okicici";
+            const recipientName = "Warzone Gaming Cafe";
+            const upiUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(recipientName)}&am=${amount}&cu=INR&tn=Warzone%20Gaming%20Booking`;
+            document.getElementById('genericUpiPayBtn').href = upiUrl;
+        }
+
+        function copyUpiId() {
+            const upiText = document.getElementById('upiIdText').innerText;
+            navigator.clipboard.writeText(upiText).then(() => {
+                const copyBtnText = document.getElementById('copyBtnText');
+                copyBtnText.innerText = "Copied!";
+                setTimeout(() => {
+                    copyBtnText.innerText = "Copy";
+                }, 2000);
+            }).catch(err => {
+                alert("Failed to copy UPI ID");
+            });
+        }
+
+        function initiatePayment(event) {
+            event.preventDefault();
+            document.getElementById('confirmPaymentCheckbox').checked = false;
+            toggleWhatsAppButton();
+            document.getElementById('paymentModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('paymentModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleWhatsAppButton() {
+            const isChecked = document.getElementById('confirmPaymentCheckbox').checked;
+            const whatsappBtn = document.getElementById('whatsappSubmitBtn');
+            if (isChecked) {
+                whatsappBtn.disabled = false;
+                whatsappBtn.style.opacity = '1';
+                whatsappBtn.style.cursor = 'pointer';
+            } else {
+                whatsappBtn.disabled = true;
+                whatsappBtn.style.opacity = '0.5';
+                whatsappBtn.style.cursor = 'not-allowed';
+            }
+        }
+
+        function saveBookingAndConfirm() {
+            const date = document.getElementById('gameDate').value;
+            const time = document.getElementById('gameTime').value;
+            const consoleType = document.getElementById('consoleType').value;
+            const slots = document.getElementById('slots').value;
+            const duration = document.getElementById('hours').value;
+
+            if(window.cloudSaveBooking) {
+                window.cloudSaveBooking({ date, time, consoleType, slots, duration, isManualBlock: false });
+            }
+
+            sendWhatsAppConfirmation();
+        }
+
+        function sendWhatsAppConfirmation() {
+            const name = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
+            const consoleType = document.getElementById('consoleType').value;
+            const slots = document.getElementById('slots').value;
+            const players = document.getElementById('players').value;
+            const date = document.getElementById('gameDate').value;
+            const time = document.getElementById('gameTime').value;
+            const hoursValue = document.getElementById('hours').options[document.getElementById('hours').selectedIndex].text;
+            const amount = document.getElementById('calculatedPrice').innerText;
+
+            const message = `🔥 *WARZONE GAMING CAFE BOOKING* 🔥\n\n` +
+                            `👤 *Customer Name:* ${name}\n` +
+                            `📞 *Phone Number:* ${phone}\n` +
+                            `🎮 *Console Type:* ${consoleType}\n` +
+                            `🕹️ *Stations/Slots:* ${slots}\n` +
+                            `👥 *Players/Station:* ${players}\n` +
+                            `📅 *Session Date:* ${date}\n` +
+                            `⏰ *Session Time:* ${time}\n` +
+                            `⌛ *Duration:* ${hoursValue}\n\n` +
+                            `💰 *Total Paid:* ₹${amount}\n` +
+                            `✅ *Payment Status:* Completed Online\n\n` +
+                            `Locking in our slots. Ready to game! 🚀`;
+
+            window.open(`https://wa.me/917338904277?text=${encodeURIComponent(message)}`, '_blank');
+            closeModal();
+            checkAvailability();
+        }
+
+        function triggerAdminAuth() {
+            document.getElementById('passwordErrorMsg').style.display = 'none';
+            document.getElementById('adminPasswordField').value = '';
+            document.getElementById('adminPasswordModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => document.getElementById('adminPasswordField').focus(), 150);
+        }
+
+        function closeAdminPasswordGate() {
+            document.getElementById('adminPasswordModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function verifyAdminPassword() {
+            const inputVal = document.getElementById('adminPasswordField').value;
+            if (inputVal === ADMIN_PASSWORD) {
+                closeAdminPasswordGate();
+                openAdmin();
+            } else {
+                document.getElementById('passwordErrorMsg').style.display = 'block';
+                document.getElementById('adminPasswordField').select();
+            }
+        }
+
+        function openAdmin() {
+            document.getElementById('adminModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('adminDate').valueAsDate = new Date();
+            updateAdminSlotsLimit();
+            renderAdminTable();
+        }
+
+        function closeAdmin() {
+            document.getElementById('adminModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            checkAvailability();
+        }
+
+        function adminManualBlock() {
+            const date = document.getElementById('adminDate').value;
+            const time = document.getElementById('adminTime').value;
+            const consoleType = document.getElementById('adminConsole').value;
+            const duration = document.getElementById('adminDuration').value;
+            const slots = document.getElementById('adminSlots').value; 
+
+            if (!date || !time) {
+                alert("Please select both Date and Time to apply block.");
+                return;
+            }
+
+            if(window.cloudSaveBooking) {
+                window.cloudSaveBooking({ date, time, consoleType, slots, duration, isManualBlock: true });
+            }
+
+            alert(`🔒 Successfully blocked ${slots} slot(s) for ${consoleType} (${duration} Hour(s)) starting from ${time}!`);
+        }
+
+        function removeBooking(id) {
+            if(window.cloudRemoveBooking) {
+                window.cloudRemoveBooking(id);
+            }
+        }
+
+        function renderAdminTable() {
+            let bookings = window.globalBookings || [];
+            const tbody = document.getElementById('adminBookingsTable');
+            tbody.innerHTML = '';
+
+            bookings.forEach((b) => {
+                const startMinutes = timeToMinutes(b.time);
+                const endMinutes = startMinutes + (parseFloat(b.duration) * 60);
+                const endTimeStr = minutesToTime(endMinutes);
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${b.date}</td>
+                    <td>${b.time}</td>
+                    <td>${endTimeStr}</td>
+                    <td>${b.consoleType}</td>
+                    <td>${b.slots} ${b.isManualBlock ? '(Admin Block)' : '(Booked)'}</td>
+                    <td><button class="btn-danger" onclick="removeBooking('${b.id}')">Delete</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key.toUpperCase() === 'A') {
+                e.preventDefault();
+                triggerAdminAuth();
+            }
+        });
+
+        document.getElementById('gameDate').valueAsDate = new Date();
+        updateConsoleLimits();
+        checkAvailability();
+    </script>
+</body>
+</html>
