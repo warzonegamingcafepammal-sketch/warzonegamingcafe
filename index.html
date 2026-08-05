@@ -623,7 +623,10 @@
 
         .qr-container {
             margin: 15px 0;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
         .qr-container img {
@@ -631,27 +634,8 @@
             height: 180px;
             border-radius: 8px;
             border: 2px solid var(--neon-orange);
-            object-fit: cover;
             background: #fff;
-        }
-
-        .download-qr-btn {
-            display: inline-block;
-            margin-top: 8px;
-            background: #222;
-            color: var(--neon-orange);
-            border: 1px solid var(--neon-orange);
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .download-qr-btn:hover {
-            background: var(--neon-orange);
-            color: #fff;
+            padding: 5px;
         }
 
         .close-modal {
@@ -1058,15 +1042,4 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="gameDate">Date</label>
-                        <input type="date" id="gameDate" onchange="checkAvailability();" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="gameTime">Time Slot (24 Hours Open)</label>
-                        <select id="gameTime" onchange="checkAvailability();" required>
-                            <option value="12:00 AM">12:00 AM (Midnight)</option>
-                            <option value="12:30 AM">12:30 AM</option>
-                            <option value="01:00 AM">01:00 AM</option>
-                            <option value="01:30 AM">01:30 AM</option>
-                            <option value="02:00 AM">02:00 AM</option>
-                         
+                        <label for="gameDate">Dat
