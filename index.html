@@ -1701,7 +1701,7 @@
         }
 
         function generatePaymentLink(amount) {
-            const upiId = "7338904277@okbizaxis";
+            const upiId = "warzonegamingcafepammal@okaxis";
             const recipientName = "Warzone Gaming Cafe";
             const upiUrl = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(recipientName)}&am=${amount}&cu=INR&tn=Warzone%20Gaming%20Booking`;
             document.getElementById('genericUpiPayBtn').href = upiUrl;
