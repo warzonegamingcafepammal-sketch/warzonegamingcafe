@@ -646,4 +646,427 @@
             font-size: 0.85rem;
             font-weight: bold;
             text-decoration: none;
-            transition: var(--tran
+            transition: var(--transition);
+        }
+
+        .download-qr-btn:hover {
+            background: var(--neon-orange);
+            color: #fff;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 1.5rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(0,0,0,0.4);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            color: var(--neon-red);
+        }
+
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .screenshot-box {
+            background: rgba(255, 77, 0, 0.05);
+            border: 1px dashed var(--neon-orange);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .screenshot-box p {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .screenshot-box span {
+            display: block;
+            font-size: 0.8rem;
+            color: #bbb;
+            margin-top: 3px;
+        }
+
+        .validation-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255, 77, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(255, 77, 0, 0.3);
+            text-align: left;
+        }
+
+        .validation-check input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--neon-orange);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .validation-check label {
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        /* --- ADMIN PANEL TABLES --- */
+        .admin-table-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            min-width: 420px;
+        }
+
+        .admin-table th, .admin-table td {
+            border: 1px solid #444;
+            padding: 6px;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .admin-table th {
+            background-color: var(--neon-orange);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--neon-red);
+            border: none;
+            color: white;
+            padding: 4px 8px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        /* --- BRAND BANNER --- */
+        .brand-banner {
+            background-color: #0b0b0b;
+            border-top: 3px solid var(--neon-orange);
+            padding: 40px 5%;
+            text-align: center;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+        }
+
+        .brand-banner h2 {
+            color: #fff;
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px var(--neon-orange);
+        }
+
+        .brand-banner .tagline {
+            color: var(--neon-orange);
+            font-size: clamp(1rem, 2.2vw, 1.6rem);
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .brand-banner .desc {
+            max-width: 700px;
+            margin: 0 auto;
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #050505;
+            border-top: 1px solid #222;
+            padding: 35px 5% 20px 5%;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto 25px auto;
+            text-align: left;
+        }
+
+        .footer-info h3 {
+            color: var(--neon-orange);
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+
+        .footer-info p, .footer-info a {
+            color: #ccc;
+            font-size: 0.95rem;
+            text-decoration: none;
+            margin-bottom: 8px;
+            display: block;
+            transition: var(--transition);
+            word-break: break-word;
+        }
+
+        .footer-info a:hover {
+            color: var(--neon-orange);
+            padding-left: 5px;
+        }
+
+        .footer-info i {
+            width: 22px;
+            color: var(--neon-orange);
+        }
+
+        .review-btn-footer {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #4285F4, #34A853);
+            color: white !important;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: var(--transition);
+        }
+
+        .review-btn-footer:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 18px rgba(52, 168, 83, 0.7);
+            padding-left: 12px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #222;
+            padding-top: 15px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* --- MOBILE RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 900px) {
+            .game-detail-container {
+                flex-direction: column;
+                height: 90vh;
+                max-height: none;
+            }
+            .game-detail-image-panel {
+                flex: none;
+                height: 200px;
+                border-right: none;
+                border-bottom: 2px solid var(--neon-orange);
+            }
+            .game-detail-text-panel {
+                flex: 1;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 4%;
+            }
+            .logo-img {
+                width: 55px;
+                height: 55px;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 20px 0;
+                border-bottom: 3px solid var(--neon-orange);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+                gap: 15px;
+                text-align: center;
+                z-index: 100;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                width: 100%;
+            }
+            nav a {
+                display: block;
+                padding: 8px 0;
+                font-size: 1.1rem;
+            }
+            .footer-grid {
+                text-align: center;
+            }
+            .footer-info a:hover {
+                padding-left: 0;
+            }
+            .booking-container {
+                padding: 15px 12px;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- OFFER HEADER -->
+    <div class="offer-header">
+        <i class="fa-solid fa-bolt"></i> <span class="highlight">OFFER! JUST 100 FOR TWO PLAYER</span> <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-container">
+            <img src="logo.jpeg" alt="Warzone Gaming Cafe" class="logo-img" onerror="this.style.display='none'">
+            <div class="logo-text">WARZONE <span>GAMING CAFE</span></div>
+        </div>
+        <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <nav>
+            <ul id="navMenu">
+                <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+                <li><a href="#carousel" onclick="closeMobileMenu()">Games</a></li>
+                <li><a href="#book" onclick="closeMobileMenu()">Book Slot</a></li>
+                <li>
+                    <a href="https://share.google/jIItWmIE56JDyO6PY" target="_blank" class="review-btn-footer" onclick="closeMobileMenu()">
+                        <i class="fa-solid fa-star"></i> Leave a Review
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <h1>GAME HARD. CHILL HARDER.</h1>
+        <p>PS4 & PS2 Gaming Arena</p>
+        <button class="btn-glow" onclick="document.getElementById('book').scrollIntoView();">BOOK YOUR STATION</button>
+    </section>
+
+    <!-- CAROUSEL -->
+    <section class="carousel-section" id="carousel">
+        <h2 class="section-title">CHOOSE YOUR BATTLE</h2>
+        <div class="carousel-outer">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="slide-card" onclick="openGameDetail('cod')"><img src="cod.jpg" alt="Call of Duty"><div class="slide-title">Call of Duty: Black Ops III</div></div>
+                <div class="slide-card" onclick="openGameDetail('wd2')"><img src="wd2.jpg" alt="Watch Dogs 2"><div class="slide-title">Watch Dogs 2</div></div>
+                <div class="slide-card" onclick="openGameDetail('wwe')"><img src="wwe.jpg" alt="WWE 2K25"><div class="slide-title">WWE 2K25</div></div>
+                <div class="slide-card" onclick="openGameDetail('tekken')"><img src="tekken.jpg" alt="Tekken 7"><div class="slide-title">Tekken 7</div></div>
+                <div class="slide-card" onclick="openGameDetail('dirt')"><img src="dirt.jpg" alt="Dirt 5"><div class="slide-title">Dirt 5</div></div>
+                <div class="slide-card" onclick="openGameDetail('fc26')"><img src="fc26.jpg" alt="EA Sports FC 26"><div class="slide-title">EA Sports FC 26</div></div>
+                <div class="slide-card" onclick="openGameDetail('gta')"><img src="gta.jpg" alt="GTA V"><div class="slide-title">Grand Theft Auto V</div></div>
+                <div class="slide-card" onclick="openGameDetail('awo')"><img src="awo.jpeg" alt="A Way Out"><div class="slide-title">A Way Out</div></div>
+                <div class="slide-card" onclick="openGameDetail('it')"><img src="it.jpeg" alt="It Takes Two"><div class="slide-title">It Takes Two</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GAME DETAIL LIGHTBOX MODAL -->
+    <div id="gameDetailModal" class="game-detail-modal">
+        <div class="game-detail-container">
+            <span class="close-detail-modal" onclick="closeGameDetail()">&times;</span>
+            
+            <div class="game-detail-image-panel">
+                <img id="detailGameImage" src="" alt="Game Poster">
+            </div>
+
+            <div class="game-detail-text-panel">
+                <h3 id="detailGameTitle" class="game-detail-title">Game Title</h3>
+                
+                <div class="game-detail-meta">
+                    <span class="meta-badge" id="detailGenre">Action</span>
+                    <span class="meta-badge" id="detailPlayersLimit">1-4 Players</span>
+                    <span class="meta-badge" id="detailPlatform">PS4 Pro</span>
+                </div>
+
+                <div class="game-detail-body" id="detailGameContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKING & PAYMENT SECTION -->
+    <section class="booking-section" id="book">
+        <div class="booking-container">
+            <h2 class="section-title" style="display:block; text-align:center; margin-bottom:20px;">RESERVE AND PAY</h2>
+            
+            <form id="bookingForm" onsubmit="initiatePayment(event)">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter your number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="consoleType">Select Console</label>
+                        <select id="consoleType" onchange="updateConsoleLimits(); checkAvailability();" required>
+                            <option value="PS4" selected>PlayStation 4 (PS4)</option>
+                            <option value="PS2">PlayStation 2 (PS2)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="slots">Number of Slots / Stations</label>
+                        <input type="number" id="slots" min="1" max="2" value="1" onchange="checkAvailability();" required>
+                        <div id="slotWarning" class="slot-warning">PS2 only has 1 slot station available!</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="players">Players per Station</label>
+                        <select id="players" onchange="calculateTotal()" required>
+                            <option value="1">1 Player</option>
+                            <option value="2" selected>2 Players</option>
+                            <option value="3">3 Players</option>
+                            <option value="4">4 Players</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="gameDate">Date</label>
+                        <input type="date" id="gameDate" onchange="checkAvailability();" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gameTime">Time Slot (24 Hours Open)</label>
+                        <select id="gameTime" onchange="checkAvailability();" required>
+                            <option value="12:00 AM">12:00 AM (Midnight)</option>
+                            <option value="12:30 AM">12:30 AM</option>
+                            <option value="01:00 AM">01:00 AM</option>
+                            <option value="01:30 AM">01:30 AM</option>
+                            <option value="02:00 AM">02:00 AM</option>
+                         
