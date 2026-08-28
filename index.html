@@ -8,6 +8,12 @@
     <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Razorpay Checkout -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <!-- SheetJS (Excel export) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- EmailJS (owner email notifications) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <style>
         :root {
@@ -254,7 +260,8 @@
             display: flex;
             gap: 20px;
             width: max-content;
-            transition: transform 0.1s linear;
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
         .slide-card {
@@ -581,64 +588,6 @@
             text-align: left;
         }
 
-        .upi-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #1a1a1a;
-            border: 1px solid #444;
-            padding: 8px 12px;
-            border-radius: 5px;
-            margin-top: 6px;
-            gap: 10px;
-        }
-
-        .upi-box span {
-            font-family: monospace;
-            font-size: 0.95rem;
-            color: #fff;
-            word-break: break-all;
-        }
-
-        .copy-upi-btn {
-            background: var(--neon-orange);
-            color: #fff;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.85rem;
-            font-family: 'Orbitron', sans-serif;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex-shrink: 0;
-        }
-
-        .copy-upi-btn:hover {
-            background: #ff6a2a;
-            box-shadow: 0 0 10px var(--neon-orange);
-        }
-
-        .qr-container {
-            margin: 15px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .qr-container img {
-            width: 180px;
-            height: 180px;
-            border-radius: 8px;
-            border: 2px solid var(--neon-orange);
-            background: #fff;
-            padding: 5px;
-        }
-
         .close-modal {
             position: absolute;
             top: 10px;
@@ -658,61 +607,6 @@
 
         .close-modal:hover {
             color: var(--neon-red);
-        }
-
-        .step-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 12px;
-        }
-
-        .screenshot-box {
-            background: rgba(255, 77, 0, 0.05);
-            border: 1px dashed var(--neon-orange);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .screenshot-box p {
-            font-size: 0.95rem;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .screenshot-box span {
-            display: block;
-            font-size: 0.8rem;
-            color: #bbb;
-            margin-top: 3px;
-        }
-
-        .validation-check {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: rgba(255, 77, 0, 0.1);
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid rgba(255, 77, 0, 0.3);
-            text-align: left;
-        }
-
-        .validation-check input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--neon-orange);
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        .validation-check label {
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            line-height: 1.2;
         }
 
         /* --- ADMIN PANEL TABLES --- */
@@ -750,6 +644,81 @@
             cursor: pointer;
             border-radius: 3px;
             font-weight: bold;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #4caf50;
+            color: #4caf50;
+        }
+
+        .btn-secondary:hover {
+            background: #4caf50;
+            color: #fff;
+        }
+
+        /* --- ADMIN SUMMARY & STAFF PANEL --- */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .summary-box {
+            background: rgba(255, 77, 0, 0.08);
+            border: 1px solid var(--neon-orange);
+            border-radius: 8px;
+            padding: 10px 8px;
+            text-align: center;
+        }
+
+        .summary-box .summary-value {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: var(--neon-orange);
+            display: block;
+        }
+
+        .summary-box .summary-label {
+            font-size: 0.72rem;
+            color: #bbb;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #444;
+        }
+
+        .admin-tab-btn {
+            background: transparent;
+            border: none;
+            color: #bbb;
+            padding: 8px 14px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            text-transform: uppercase;
+        }
+
+        .admin-tab-btn.active {
+            color: var(--neon-orange);
+            border-bottom-color: var(--neon-orange);
+        }
+
+        .admin-tab-panel {
+            display: none;
+        }
+
+        .admin-tab-panel.active {
+            display: block;
         }
 
         /* --- BRAND BANNER --- */
@@ -1011,7 +980,7 @@
         <div class="booking-container">
             <h2 class="section-title" style="display:block; text-align:center; margin-bottom:20px;">RESERVE AND PAY</h2>
             
-            <form id="bookingForm" onsubmit="initiatePayment(event)">
+            <form id="bookingForm" onsubmit="startRazorpayPayment(event)">
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
@@ -1127,45 +1096,23 @@
         </div>
     </section>
 
-    <!-- PAYMENT MODAL -->
-    <div id="paymentModal" class="modal">
+    <!-- BOOKING SUCCESS MODAL -->
+    <div id="successModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3>UPI Payment Portal</h3>
-            
-            <div class="payment-instructions">
-                Grand Total: <strong style="color: var(--neon-orange);">₹<span id="modalAmount">100</span></strong><br><br>
-                UPI ID:
-                <div class="upi-box">
-                    <span id="upiIdText">7338904277@okbizaxis</span>
-                    <button class="copy-upi-btn" onclick="copyUpiId()">
-                        <i class="fa-solid fa-copy"></i> <span id="copyBtnText">Copy</span>
-                    </button>
-                </div>
+            <span class="close-modal" onclick="closeSuccessModal()">&times;</span>
+            <div style="font-size: 3rem; color: #4caf50; margin-bottom: 10px;">
+                <i class="fa-solid fa-circle-check"></i>
             </div>
-
-            <div class="qr-container">
-                <img id="qrCodeImage" src="qr.jpeg" alt="UPI QR Code">
-                <a href="qr.jpeg" download="Warzone_UPI_QR.jpeg" class="btn-glow" style="padding: 6px 15px; font-size: 0.85rem;">
-                    <i class="fa-solid fa-download"></i> Download QR Code
-                </a>
+            <h3 style="color: #4caf50;">Booking Confirmed!</h3>
+            <div class="payment-instructions" style="text-align:left;">
+                <div id="successSummary"></div>
             </div>
-
-            <div class="step-container">
-                <div class="screenshot-box">
-                    <p>📸 Capture your payment screenshot</p>
-                    <span>Add it to your WhatsApp chat on the next step to confirm your slot!</span>
-                </div>
-                
-                <div class="validation-check">
-                    <input type="checkbox" id="confirmPaymentCheckbox" onchange="toggleWhatsAppButton()">
-                    <label for="confirmPaymentCheckbox">I have completed my online payment</label>
-                </div>
-
-                <button id="whatsappSubmitBtn" class="btn-glow" onclick="saveBookingAndConfirm()" style="width: 100%; opacity: 0.5; cursor: not-allowed;" disabled>
-                    <i class="fa-brands fa-whatsapp"></i> CONFIRM & SEND TO WHATSAPP
-                </button>
-            </div>
+            <p style="font-size: 0.9rem; color: #bbb; margin-top: 10px;">
+                Our team has been notified. See you at the arena! 🎮
+            </p>
+            <button class="btn-glow" onclick="closeSuccessModal()" style="width: 100%; margin-top: 15px;">
+                <i class="fa-solid fa-check"></i> DONE
+            </button>
         </div>
     </div>
 
@@ -1185,62 +1132,204 @@
 
     <!-- OWNER ADMIN PANEL MODAL -->
     <div id="adminModal" class="modal">
-        <div class="modal-content" style="max-width: 650px;">
+        <div class="modal-content" style="max-width: 700px;">
             <span class="close-modal" onclick="closeAdmin()">&times;</span>
             <h3><i class="fa-solid fa-screwdriver-wrench"></i> Warzone Admin Control</h3>
-            
-            <div class="payment-instructions" style="text-align: left; border-left: 4px solid var(--neon-red);">
-                <h4 style="margin-bottom:8px; font-size:1.05rem;">Block Slots Manually</h4>
-                <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom:10px;">
-                    <div>
+
+            <div class="admin-tabs">
+                <button class="admin-tab-btn active" id="tabBtnManage" onclick="switchAdminTab('manage')">Manage Slots</button>
+                <button class="admin-tab-btn" id="tabBtnReports" onclick="switchAdminTab('reports')">Reports & Export</button>
+            </div>
+
+            <!-- MANAGE SLOTS TAB -->
+            <div class="admin-tab-panel active" id="adminTabManage">
+                <div class="payment-instructions" style="text-align: left; border-left: 4px solid var(--neon-red);">
+                    <h4 style="margin-bottom:8px; font-size:1.05rem;">Block Slots Manually</h4>
+                    <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom:10px;">
+                        <div>
+                            <label style="font-size:0.8rem;">Date</label>
+                            <input type="date" id="adminDate" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem;">Time</label>
+                            <select id="adminTime" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;"></select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem;">Console</label>
+                            <select id="adminConsole" onchange="updateAdminSlotsLimit()" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                                <option value="PS4">PS4</option>
+                                <option value="PS2">PS2</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem;">Stations / Slots</label>
+                            <select id="adminSlots" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                                <option value="1">1 Slot</option>
+                                <option value="2">2 Slots</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem;">Duration</label>
+                            <select id="adminDuration" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                                <option value="1">1 Hour</option>
+                                <option value="1.5">1.5 Hours</option>
+                                <option value="2">2 Hours</option>
+                                <option value="3">3 Hours</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="adminManualBlock()" class="btn-glow" style="padding: 8px 15px; font-size:0.95rem; width:100%;">BLOCK SLOT STATION</button>
+                </div>
+
+                <h4 style="margin:15px 0 8px 0; text-align:left; font-size:1.1rem;">Active Reservations / Blocks</h4>
+                <div class="admin-table-container" style="max-height: 200px; overflow-y: auto;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>End Time</th>
+                                <th>Console</th>
+                                <th>Stations</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminBookingsTable"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- REPORTS & EXPORT TAB -->
+            <div class="admin-tab-panel" id="adminTabReports">
+                <div class="payment-instructions" style="text-align: left;">
+                    <h4 style="margin-bottom:8px; font-size:1.05rem;">Select Date Range</h4>
+                    <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom:10px;">
+                        <div>
+                            <label style="font-size:0.8rem;">From</label>
+                            <input type="date" id="summaryFromDate" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                        </div>
+                        <div>
+                            <label style="font-size:0.8rem;">To</label>
+                            <input type="date" id="summaryToDate" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                        <button onclick="generateSummary()" class="btn-glow" style="padding: 8px 15px; font-size:0.9rem; flex:1; min-width:150px;">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i> GET SUMMARY
+                        </button>
+                        <button onclick="downloadExcel()" class="btn-glow btn-secondary" style="padding: 8px 15px; font-size:0.9rem; flex:1; min-width:150px;">
+                            <i class="fa-solid fa-file-excel"></i> DOWNLOAD EXCEL
+                        </button>
+                    </div>
+                </div>
+
+                <div id="summaryResults" style="display:none;">
+                    <h4 style="margin:15px 0 8px 0; text-align:left; font-size:1.05rem;">Summary</h4>
+                    <div class="summary-grid">
+                        <div class="summary-box"><span class="summary-value" id="sumTotalBookings">0</span><span class="summary-label">Bookings</span></div>
+                        <div class="summary-box"><span class="summary-value" id="sumTotalRevenue">₹0</span><span class="summary-label">Revenue</span></div>
+                        <div class="summary-box"><span class="summary-value" id="sumTotalSlots">0</span><span class="summary-label">Slots</span></div>
+                        <div class="summary-box"><span class="summary-value" id="sumOnlineCount">0</span><span class="summary-label">Online</span></div>
+                        <div class="summary-box"><span class="summary-value" id="sumStaffCount">0</span><span class="summary-label">Staff Entry</span></div>
+                        <div class="summary-box"><span class="summary-value" id="sumPS4Revenue">₹0</span><span class="summary-label">PS4 Revenue</span></div>
+                        <div class="summary-box"><span class="summary-value" id="sumPS2Revenue">₹0</span><span class="summary-label">PS2 Revenue</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STAFF PANEL MODAL -->
+    <div id="staffModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-modal" onclick="closeStaff()">&times;</span>
+            <h3><i class="fa-solid fa-user-tie"></i> Staff Slot Entry</h3>
+            <p style="margin-bottom:12px; color:#bbb; font-size: 0.9rem; text-align:left;">Log a walk-in / offline booking below. It will reflect in the owner's admin summary.</p>
+
+            <div class="payment-instructions" style="text-align: left;">
+                <div class="form-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom:10px;">
+                    <div class="form-group">
+                        <label style="font-size:0.8rem;">Customer Name</label>
+                        <input type="text" id="staffCustomerName" placeholder="Walk-in customer" style="padding:8px; font-size:0.9rem;">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size:0.8rem;">Phone</label>
+                        <input type="tel" id="staffCustomerPhone" placeholder="Optional" style="padding:8px; font-size:0.9rem;">
+                    </div>
+                    <div class="form-group">
                         <label style="font-size:0.8rem;">Date</label>
-                        <input type="date" id="adminDate" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                        <input type="date" id="staffDate" onchange="renderStaffTodayTable()" style="padding:8px; font-size:0.9rem;">
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label style="font-size:0.8rem;">Time</label>
-                        <select id="adminTime" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;"></select>
+                        <select id="staffTime" style="padding:8px; font-size:0.9rem;"></select>
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label style="font-size:0.8rem;">Console</label>
-                        <select id="adminConsole" onchange="updateAdminSlotsLimit()" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                        <select id="staffConsole" onchange="updateStaffSlotsLimit()" style="padding:8px; font-size:0.9rem;">
                             <option value="PS4">PS4</option>
                             <option value="PS2">PS2</option>
                         </select>
                     </div>
-                    <div>
-                        <label style="font-size:0.8rem;">Stations / Slots</label>
-                        <select id="adminSlots" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                    <div class="form-group">
+                        <label style="font-size:0.8rem;">Slots</label>
+                        <select id="staffSlots" style="padding:8px; font-size:0.9rem;">
                             <option value="1">1 Slot</option>
-                            <option value="2">2 Slots</option>
+                            <option value="2" selected>2 Slots</option>
                         </select>
                     </div>
-                    <div>
+                    <div class="form-group">
+                        <label style="font-size:0.8rem;">Players/Station</label>
+                        <select id="staffPlayers" style="padding:8px; font-size:0.9rem;">
+                            <option value="1">1 Player</option>
+                            <option value="2" selected>2 Players</option>
+                            <option value="3">3 Players</option>
+                            <option value="4">4 Players</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label style="font-size:0.8rem;">Duration</label>
-                        <select id="adminDuration" style="width:100%; padding:6px; background:#222; color:#fff; border:1px solid #444; font-size:0.9rem;">
+                        <select id="staffDuration" style="padding:8px; font-size:0.9rem;">
                             <option value="1">1 Hour</option>
                             <option value="1.5">1.5 Hours</option>
                             <option value="2">2 Hours</option>
+                            <option value="2.5">2.5 Hours</option>
                             <option value="3">3 Hours</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label style="font-size:0.8rem;">Amount Collected (₹)</label>
+                        <input type="number" id="staffAmount" placeholder="e.g. 200" min="0" style="padding:8px; font-size:0.9rem;">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size:0.8rem;">Payment Mode</label>
+                        <select id="staffPaymentMode" style="padding:8px; font-size:0.9rem;">
+                            <option value="Cash">Cash</option>
+                            <option value="UPI">UPI (In-Person)</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
                 </div>
-                <button onclick="adminManualBlock()" class="btn-glow" style="padding: 8px 15px; font-size:0.95rem; width:100%;">BLOCK SLOT STATION</button>
+                <button onclick="staffSaveBooking()" class="btn-glow" style="width:100%; padding: 10px 15px;">
+                    <i class="fa-solid fa-floppy-disk"></i> SAVE SLOT ENTRY
+                </button>
             </div>
 
-            <h4 style="margin:15px 0 8px 0; text-align:left; font-size:1.1rem;">Active Reservations / Blocks</h4>
-            <div class="admin-table-container" style="max-height: 200px; overflow-y: auto;">
+            <h4 style="margin:15px 0 8px 0; text-align:left; font-size:1rem;">Today's Entries</h4>
+            <div class="admin-table-container" style="max-height: 180px; overflow-y: auto;">
                 <table class="admin-table">
                     <thead>
                         <tr>
-                            <th>Date</th>
                             <th>Time</th>
-                            <th>End Time</th>
                             <th>Console</th>
-                            <th>Stations</th>
-                            <th>Action</th>
+                            <th>Slots</th>
+                            <th>Customer</th>
+                            <th>Amount</th>
                         </tr>
                     </thead>
-                    <tbody id="adminBookingsTable"></tbody>
+                    <tbody id="staffTodayTable"></tbody>
                 </table>
             </div>
         </div>
@@ -1330,6 +1419,59 @@
 
     <script>
         const ADMIN_PASSWORD = "warzone2026";
+        const STAFF_PASSWORD = "warzoneStaff2026"; // Give this to trusted staff only - opens a restricted slot-entry panel
+
+        // --- OWNER NOTIFICATION SETTINGS ---
+        // TODO: Fill these in to receive booking alerts. See setup notes at the end of the chat reply.
+        const OWNER_EMAIL = "youremail@example.com";
+        const OWNER_WHATSAPP_NUMBER = "917338904277"; // country code + number, no + or spaces
+        const EMAILJS_PUBLIC_KEY = "YOUR_EMAILJS_PUBLIC_KEY";
+        const EMAILJS_SERVICE_ID = "YOUR_EMAILJS_SERVICE_ID";
+        const EMAILJS_TEMPLATE_ID = "YOUR_EMAILJS_TEMPLATE_ID";
+        const CALLMEBOT_APIKEY = "YOUR_CALLMEBOT_APIKEY";
+
+        if (window.emailjs && EMAILJS_PUBLIC_KEY !== "YOUR_EMAILJS_PUBLIC_KEY") {
+            emailjs.init(EMAILJS_PUBLIC_KEY);
+        }
+
+        function notifyOwnerOfBooking(details) {
+            const summaryText = `🔥 NEW BOOKING - WARZONE 🔥\n` +
+                `Customer: ${details.name}\n` +
+                `Phone: ${details.phone}\n` +
+                `Console: ${details.consoleType} | Slots: ${details.slots} | Players: ${details.players}\n` +
+                `Date: ${details.date} | Time: ${details.time} | Duration: ${details.duration} hr\n` +
+                `Amount: ₹${details.amount} (${details.paymentMode}${details.paymentId ? ' - ' + details.paymentId : ''})\n` +
+                `Source: ${details.source}`;
+
+            // 1) Email via EmailJS (free tier, client-safe public key)
+            if (window.emailjs && EMAILJS_SERVICE_ID !== "YOUR_EMAILJS_SERVICE_ID") {
+                emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+                    to_email: OWNER_EMAIL,
+                    customer_name: details.name,
+                    customer_phone: details.phone,
+                    console_type: details.consoleType,
+                    slots: details.slots,
+                    players: details.players,
+                    booking_date: details.date,
+                    booking_time: details.time,
+                    duration: details.duration,
+                    amount: details.amount,
+                    payment_mode: details.paymentMode,
+                    payment_id: details.paymentId || 'N/A',
+                    source: details.source
+                }).catch(err => console.warn("Owner email notification failed:", err));
+            }
+
+            // 2) WhatsApp via CallMeBot (sends straight to the owner's own WhatsApp)
+            if (CALLMEBOT_APIKEY !== "YOUR_CALLMEBOT_APIKEY") {
+                const waUrl = `https://api.callmebot.com/whatsapp.php?phone=${OWNER_WHATSAPP_NUMBER}&text=${encodeURIComponent(summaryText)}&apikey=${CALLMEBOT_APIKEY}`;
+                fetch(waUrl, { mode: 'no-cors' }).catch(err => console.warn("Owner WhatsApp notification failed:", err));
+            }
+
+            // 3) SMS is intentionally not wired up here: SMS providers (Twilio, Fast2SMS, etc.)
+            // require a secret API key that should never be exposed in client-side code like this file.
+            // Ask me to add this once you have a small backend/serverless endpoint to send it through.
+        }
 
         function toggleMobileMenu() {
             const navMenu = document.getElementById('navMenu');
@@ -1556,23 +1698,28 @@
         });
 
         let currentScroll = 0;
-        const speed = 1.5; 
+        const speedPerSecond = 90; // pixels per second - consistent speed regardless of screen refresh rate
         let isPaused = false;
+        let lastTimestamp = null;
 
-        function scrollCarousel() {
+        function scrollCarousel(timestamp) {
+            if (lastTimestamp === null) lastTimestamp = timestamp;
+            const deltaSeconds = (timestamp - lastTimestamp) / 1000;
+            lastTimestamp = timestamp;
+
             if (!isPaused) {
-                currentScroll -= speed;
+                currentScroll -= speedPerSecond * deltaSeconds;
                 const resetBoundary = track.scrollWidth / 2;
                 if (Math.abs(currentScroll) >= resetBoundary) {
-                    currentScroll = 0;
+                    currentScroll += resetBoundary;
                 }
-                track.style.transform = `translateX(${currentScroll}px)`;
+                track.style.transform = `translate3d(${currentScroll}px, 0, 0)`;
             }
             requestAnimationFrame(scrollCarousel);
         }
         track.addEventListener('mouseenter', () => isPaused = true);
         track.addEventListener('mouseleave', () => isPaused = false);
-        track.addEventListener('touchstart', () => isPaused = true);
+        track.addEventListener('touchstart', () => isPaused = true, { passive: true });
         track.addEventListener('touchend', () => isPaused = false);
         requestAnimationFrame(scrollCarousel);
 
@@ -1596,9 +1743,10 @@
 
         const gameTimeSelect = document.getElementById('gameTime');
         const adminTimeSelect = document.getElementById('adminTime');
+        const staffTimeSelect = document.getElementById('staffTime');
         Array.from(gameTimeSelect.options).forEach(opt => {
-            const clone = opt.cloneNode(true);
-            adminTimeSelect.appendChild(clone);
+            adminTimeSelect.appendChild(opt.cloneNode(true));
+            staffTimeSelect.appendChild(opt.cloneNode(true));
         });
 
         function updateConsoleLimits() {
@@ -1717,47 +1865,54 @@
 
             const grandTotal = Math.round(finalCostPerStation * slots);
             document.getElementById('calculatedPrice').innerText = grandTotal;
-            document.getElementById('modalAmount').innerText = grandTotal;
         }
 
-        function copyUpiId() {
-            const upiText = document.getElementById('upiIdText').innerText;
-            navigator.clipboard.writeText(upiText).then(() => {
-                const copyBtnText = document.getElementById('copyBtnText');
-                copyBtnText.innerText = "Copied!";
-                setTimeout(() => {
-                    copyBtnText.innerText = "Copy";
-                }, 2000);
-            }).catch(err => {
-                alert("Failed to copy UPI ID");
-            });
-        }
+        // --- RAZORPAY PAYMENT GATEWAY ---
+        // TODO: Replace with your live Razorpay Key ID (from Razorpay Dashboard > Settings > API Keys)
+        const RAZORPAY_KEY_ID = "rzp_test_XXXXXXXXXXXXXX";
+        let lastRazorpayPaymentId = "";
 
-        function initiatePayment(event) {
-            event.preventDefault();
-            document.getElementById('confirmPaymentCheckbox').checked = false;
-            toggleWhatsAppButton();
-            document.getElementById('paymentModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
+        function startRazorpayPayment(event) {
+            if (event) event.preventDefault();
+            const amount = parseInt(document.getElementById('calculatedPrice').innerText, 10) || 0;
+            const name = document.getElementById('fullName').value;
+            const phone = document.getElementById('phone').value;
 
-        function closeModal() {
-            document.getElementById('paymentModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        function toggleWhatsAppButton() {
-            const isChecked = document.getElementById('confirmPaymentCheckbox').checked;
-            const whatsappBtn = document.getElementById('whatsappSubmitBtn');
-            if (isChecked) {
-                whatsappBtn.disabled = false;
-                whatsappBtn.style.opacity = '1';
-                whatsappBtn.style.cursor = 'pointer';
-            } else {
-                whatsappBtn.disabled = true;
-                whatsappBtn.style.opacity = '0.5';
-                whatsappBtn.style.cursor = 'not-allowed';
+            if (!amount || amount <= 0) {
+                alert("Invalid amount. Please re-check your booking details.");
+                return;
             }
+
+            const options = {
+                key: RAZORPAY_KEY_ID,
+                amount: amount * 100, // Razorpay expects amount in paise
+                currency: "INR",
+                name: "WARZONE GAMING CAFE",
+                description: "Gaming Slot Booking",
+                image: "favicon.png",
+                prefill: {
+                    name: name || "",
+                    contact: phone || ""
+                },
+                theme: {
+                    color: "#ff4d00"
+                },
+                handler: function (response) {
+                    lastRazorpayPaymentId = response.razorpay_payment_id;
+                    saveBookingAndConfirm();
+                },
+                modal: {
+                    ondismiss: function () {
+                        // User closed the Razorpay popup without paying - no booking is saved
+                    }
+                }
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.on('payment.failed', function (response) {
+                alert("Payment failed: " + response.error.description);
+            });
+            rzp.open();
         }
 
         function saveBookingAndConfirm() {
@@ -1765,41 +1920,57 @@
             const time = document.getElementById('gameTime').value;
             const consoleType = document.getElementById('consoleType').value;
             const slots = document.getElementById('slots').value;
+            const players = document.getElementById('players').value;
             const duration = document.getElementById('hours').value;
-
-            if(window.cloudSaveBooking) {
-                window.cloudSaveBooking({ date, time, consoleType, slots, duration, isManualBlock: false });
-            }
-
-            sendWhatsAppConfirmation();
-        }
-
-        function sendWhatsAppConfirmation() {
             const name = document.getElementById('fullName').value;
             const phone = document.getElementById('phone').value;
-            const consoleType = document.getElementById('consoleType').value;
-            const slots = document.getElementById('slots').value;
-            const players = document.getElementById('players').value;
-            const date = document.getElementById('gameDate').value;
-            const time = document.getElementById('gameTime').value;
+            const amount = parseInt(document.getElementById('calculatedPrice').innerText, 10) || 0;
+
+            const bookingData = {
+                date, time, consoleType, slots, duration, players,
+                customerName: name,
+                phone: phone,
+                amount: amount,
+                paymentMode: 'Razorpay',
+                paymentId: lastRazorpayPaymentId,
+                source: 'customer',
+                isManualBlock: false,
+                createdAt: Date.now()
+            };
+
+            if (window.cloudSaveBooking) {
+                window.cloudSaveBooking(bookingData);
+            }
+
+            notifyOwnerOfBooking({
+                name, phone, consoleType, slots, players, date, time, duration, amount,
+                paymentMode: 'Razorpay', paymentId: lastRazorpayPaymentId, source: 'Online Booking'
+            });
+
+            showBookingSuccess(bookingData);
+            checkAvailability();
+        }
+
+        function showBookingSuccess(b) {
             const hoursValue = document.getElementById('hours').options[document.getElementById('hours').selectedIndex].text;
-            const amount = document.getElementById('calculatedPrice').innerText;
+            document.getElementById('successSummary').innerHTML = `
+                <strong>${b.customerName}</strong><br>
+                📞 ${b.phone}<br>
+                🎮 ${b.consoleType} &bull; ${b.slots} station(s) &bull; ${b.players} player(s)/station<br>
+                📅 ${b.date} at ${b.time}<br>
+                ⌛ ${hoursValue}<br>
+                💰 ₹${b.amount} paid (Razorpay)
+            `;
+            document.getElementById('successModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
 
-            const message = `🔥 *WARZONE GAMING CAFE BOOKING* 🔥\n\n` +
-                            `👤 *Customer Name:* ${name}\n` +
-                            `📞 *Phone Number:* ${phone}\n` +
-                            `🎮 *Console Type:* ${consoleType}\n` +
-                            `🕹️ *Stations/Slots:* ${slots}\n` +
-                            `👥 *Players/Station:* ${players}\n` +
-                            `📅 *Session Date:* ${date}\n` +
-                            `⏰ *Session Time:* ${time}\n` +
-                            `⌛ *Duration:* ${hoursValue}\n\n` +
-                            `💰 *Grand Total:* ₹${amount}\n` +
-                            `✅ *Payment Status:* Completed Online\n\n` +
-                            `Locking in our slots. Ready to game! 🚀`;
-
-            window.open(`https://wa.me/917338904277?text=${encodeURIComponent(message)}`, '_blank');
-            closeModal();
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('bookingForm').reset();
+            document.getElementById('gameDate').valueAsDate = new Date();
+            updateConsoleLimits();
             checkAvailability();
         }
 
@@ -1821,16 +1992,32 @@
             if (inputVal === ADMIN_PASSWORD) {
                 closeAdminPasswordGate();
                 openAdmin();
+            } else if (inputVal === STAFF_PASSWORD) {
+                closeAdminPasswordGate();
+                openStaff();
             } else {
                 document.getElementById('passwordErrorMsg').style.display = 'block';
                 document.getElementById('adminPasswordField').select();
             }
         }
 
+        function switchAdminTab(tab) {
+            const isManage = tab === 'manage';
+            document.getElementById('tabBtnManage').classList.toggle('active', isManage);
+            document.getElementById('tabBtnReports').classList.toggle('active', !isManage);
+            document.getElementById('adminTabManage').classList.toggle('active', isManage);
+            document.getElementById('adminTabReports').classList.toggle('active', !isManage);
+        }
+
         function openAdmin() {
             document.getElementById('adminModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
             document.getElementById('adminDate').valueAsDate = new Date();
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('summaryFromDate').value = today;
+            document.getElementById('summaryToDate').value = today;
+            document.getElementById('summaryResults').style.display = 'none';
+            switchAdminTab('manage');
             updateAdminSlotsLimit();
             renderAdminTable();
         }
@@ -1854,7 +2041,12 @@
             }
 
             if(window.cloudSaveBooking) {
-                window.cloudSaveBooking({ date, time, consoleType, slots, duration, isManualBlock: true });
+                window.cloudSaveBooking({
+                    date, time, consoleType, duration, slots,
+                    players: '-', customerName: 'Admin Block', phone: '-',
+                    amount: 0, paymentMode: 'Admin-Block', paymentId: '',
+                    source: 'admin', isManualBlock: true, createdAt: Date.now()
+                });
             }
 
             alert(`🔒 Successfully blocked ${slots} slot(s) for ${consoleType} (${duration} Hour(s)) starting from ${time}!`);
@@ -1883,7 +2075,173 @@
                     <td>${endTimeStr}</td>
                     <td>${b.consoleType}</td>
                     <td>${b.slots} ${b.isManualBlock ? '(Admin Block)' : '(Booked)'}</td>
+                    <td>${b.customerName || '-'}</td>
+                    <td>₹${b.amount || 0}</td>
                     <td><button class="btn-danger" onclick="removeBooking('${b.id}')">Delete</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // --- REPORTS & EXCEL EXPORT (Owner Admin Panel) ---
+        function getBookingsInRange(fromDate, toDate) {
+            const bookings = window.globalBookings || [];
+            return bookings.filter(b => b.date >= fromDate && b.date <= toDate);
+        }
+
+        function generateSummary() {
+            const fromDate = document.getElementById('summaryFromDate').value;
+            const toDate = document.getElementById('summaryToDate').value;
+
+            if (!fromDate || !toDate) {
+                alert("Please select both From and To dates.");
+                return;
+            }
+
+            const rangeBookings = getBookingsInRange(fromDate, toDate);
+            const paidBookings = rangeBookings.filter(b => !b.isManualBlock);
+
+            const totalRevenue = paidBookings.reduce((sum, b) => sum + (parseInt(b.amount) || 0), 0);
+            const totalSlots = paidBookings.reduce((sum, b) => sum + (parseInt(b.slots) || 0), 0);
+            const onlineCount = paidBookings.filter(b => b.source === 'customer').length;
+            const staffCount = paidBookings.filter(b => b.source === 'staff').length;
+            const ps4Revenue = paidBookings.filter(b => b.consoleType === 'PS4').reduce((sum, b) => sum + (parseInt(b.amount) || 0), 0);
+            const ps2Revenue = paidBookings.filter(b => b.consoleType === 'PS2').reduce((sum, b) => sum + (parseInt(b.amount) || 0), 0);
+
+            document.getElementById('sumTotalBookings').innerText = paidBookings.length;
+            document.getElementById('sumTotalRevenue').innerText = `₹${totalRevenue}`;
+            document.getElementById('sumTotalSlots').innerText = totalSlots;
+            document.getElementById('sumOnlineCount').innerText = onlineCount;
+            document.getElementById('sumStaffCount').innerText = staffCount;
+            document.getElementById('sumPS4Revenue').innerText = `₹${ps4Revenue}`;
+            document.getElementById('sumPS2Revenue').innerText = `₹${ps2Revenue}`;
+            document.getElementById('summaryResults').style.display = 'block';
+        }
+
+        function downloadExcel() {
+            const fromDate = document.getElementById('summaryFromDate').value;
+            const toDate = document.getElementById('summaryToDate').value;
+
+            if (!fromDate || !toDate) {
+                alert("Please select both From and To dates before exporting.");
+                return;
+            }
+
+            const rangeBookings = getBookingsInRange(fromDate, toDate);
+
+            if (rangeBookings.length === 0) {
+                alert("No bookings found in this date range.");
+                return;
+            }
+
+            const rows = rangeBookings.map(b => {
+                const startMinutes = timeToMinutes(b.time);
+                const endMinutes = startMinutes + (parseFloat(b.duration) * 60);
+                return {
+                    "Date": b.date,
+                    "Start Time": b.time,
+                    "End Time": minutesToTime(endMinutes),
+                    "Console": b.consoleType,
+                    "Slots": b.slots,
+                    "Players/Station": b.players || '-',
+                    "Customer Name": b.customerName || '-',
+                    "Phone": b.phone || '-',
+                    "Duration (hrs)": b.duration,
+                    "Amount (₹)": b.amount || 0,
+                    "Payment Mode": b.paymentMode || '-',
+                    "Payment ID": b.paymentId || '-',
+                    "Booking Source": b.isManualBlock ? 'Admin Block' : (b.source || '-')
+                };
+            });
+
+            const worksheet = XLSX.utils.json_to_sheet(rows);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Bookings");
+            XLSX.writeFile(workbook, `Warzone_Bookings_${fromDate}_to_${toDate}.xlsx`);
+        }
+
+        // --- STAFF PANEL ---
+        function openStaff() {
+            document.getElementById('staffModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            document.getElementById('staffDate').valueAsDate = new Date();
+            updateStaffSlotsLimit();
+            renderStaffTodayTable();
+        }
+
+        function closeStaff() {
+            document.getElementById('staffModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            checkAvailability();
+        }
+
+        function updateStaffSlotsLimit() {
+            const consoleType = document.getElementById('staffConsole').value;
+            const staffSlotsSelect = document.getElementById('staffSlots');
+            if (consoleType === 'PS2') {
+                staffSlotsSelect.innerHTML = `<option value="1">1 Slot</option>`;
+            } else {
+                staffSlotsSelect.innerHTML = `
+                    <option value="1">1 Slot</option>
+                    <option value="2" selected>2 Slots</option>
+                `;
+            }
+        }
+
+        function staffSaveBooking() {
+            const date = document.getElementById('staffDate').value;
+            const time = document.getElementById('staffTime').value;
+            const consoleType = document.getElementById('staffConsole').value;
+            const slots = document.getElementById('staffSlots').value;
+            const players = document.getElementById('staffPlayers').value;
+            const duration = document.getElementById('staffDuration').value;
+            const customerName = document.getElementById('staffCustomerName').value || 'Walk-in Customer';
+            const phone = document.getElementById('staffCustomerPhone').value || '-';
+            const amount = parseInt(document.getElementById('staffAmount').value, 10) || 0;
+            const paymentMode = document.getElementById('staffPaymentMode').value;
+
+            if (!date || !time) {
+                alert("Please select both Date and Time.");
+                return;
+            }
+
+            const bookingData = {
+                date, time, consoleType, slots, duration, players,
+                customerName, phone, amount, paymentMode,
+                paymentId: '', source: 'staff', isManualBlock: false,
+                createdAt: Date.now()
+            };
+
+            if (window.cloudSaveBooking) {
+                window.cloudSaveBooking(bookingData);
+            }
+
+            notifyOwnerOfBooking({
+                name: customerName, phone, consoleType, slots, players, date, time, duration, amount,
+                paymentMode, paymentId: '', source: 'Staff Entry'
+            });
+
+            alert(`✅ Slot entry saved for ${customerName}!`);
+            document.getElementById('staffCustomerName').value = '';
+            document.getElementById('staffCustomerPhone').value = '';
+            document.getElementById('staffAmount').value = '';
+            renderStaffTodayTable();
+        }
+
+        function renderStaffTodayTable() {
+            const todayStr = document.getElementById('staffDate').value || new Date().toISOString().split('T')[0];
+            const bookings = (window.globalBookings || []).filter(b => b.date === todayStr && b.source === 'staff');
+            const tbody = document.getElementById('staffTodayTable');
+            tbody.innerHTML = '';
+
+            bookings.forEach((b) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${b.time}</td>
+                    <td>${b.consoleType}</td>
+                    <td>${b.slots}</td>
+                    <td>${b.customerName || '-'}</td>
+                    <td>₹${b.amount || 0}</td>
                 `;
                 tbody.appendChild(tr);
             });
